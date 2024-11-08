@@ -1,0 +1,67 @@
+/*!* 기본적인 전체 페이지 설정 *!*/
+/*body, html {*/
+/*    display: flex;*/
+/*    justify-content: center;*/
+/*    align-items: center;*/
+/*    height: 100vh;*/
+/*    margin: 0;*/
+/*    font-family: Arial, sans-serif;*/
+/*    background-color: #f0f2f5; !* 배경 색상 *!*/
+/*}*/
+
+/* 컨테이너 스타일 */
+.login-container {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    background-color: #fff;
+    padding: 2rem;
+    width: 100%;
+}
+
+/* 제목 스타일 */
+.login-container h2 {
+    text-align: center;
+    color: #333;
+    margin-bottom: 1.5rem;
+}
+
+/* 폼 요소 스타일 */
+.login-container form {
+    display: flex;
+    flex-direction: column;
+}
+
+/* 입력 필드 스타일 */
+.login-container input[type="email"],
+.login-container input[type="password"] {
+    padding: 0.75rem;
+    margin-bottom: 1rem;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    font-size: 1rem;
+    box-sizing: border-box;
+}
+
+/* 버튼 스타일 */
+.login-container button {
+    padding: 0.75rem;
+    font-size: 1rem;
+    color: #fff;
+    background-color: #4a90e2;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.login-container button:hover {
+    background-color: #357ab8;
+}
+
+/* 레이블 스타일 */
+.login-container label {
+    font-size: 0.9rem;
+    color: #666;
+    margin-bottom: 0.5rem;
+}
