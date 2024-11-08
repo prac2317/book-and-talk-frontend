@@ -5,6 +5,9 @@ import Home from './pages/home/Home';
 import BookDetail from './pages/book/BookDetail';
 import GroupDetail from './pages/group/GroupDetail';
 import MapSearch from './pages/map/MapSearch.tsx';
+import ChatRoom from './pages/chat/ChatRoom.tsx';
+import ChatList from './pages/chat/ChatList.tsx';
+import Login from './pages/auth/Login.tsx';
 
 const router = createBrowserRouter([
   {
@@ -27,6 +30,18 @@ const router = createBrowserRouter([
         path: '/map',
         element: <MapSearch />,
       },
+      {
+        path: '/chat/:chatRoomId',
+        element: <ChatRoom />
+      },
+      {
+        path: '/chat',
+        element: <ChatList />
+      },
+      {
+        path: '/login',
+        element: <Login />
+      }
     ],
   },
 ]);
