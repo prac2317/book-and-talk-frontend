@@ -1,7 +1,17 @@
 .header {
     display: flex;
     flex-direction: column;
-    margin-bottom: 10px;
+    justify-content: center;
+    font-weight: bold;
+    font-size: 18px;
+}
+
+.list {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    gap: 5px;
+    margin-top: 20px;
 }
 
 .card {
@@ -48,3 +58,14 @@
     }
 }
 
+.createButton {
+    width: 120px;
+    height: 40px;
+    border: none;
+    border-radius: 10px;
+    margin-right: 10px;
+    background-color: #FAFAFB;
+    font-size: 14px;
+    font-weight: bold;
+    box-shadow: 5px 5px 5px rgba(0, 0, 0, 0.3);
+}

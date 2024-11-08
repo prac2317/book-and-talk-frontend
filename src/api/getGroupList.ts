@@ -1,8 +1,9 @@
 import API from './api.ts';
+import { Group } from '../types/index.ts';
 
-export const getGroupList = async (ISBN: string) => {
+export const getGroupList = async (isbn: string): Promise<Group[]> => {
   const data = {
-    ISBN: ISBN,
+    ISBN13: isbn,
   };
   const res = await API.get('api/groups', { json: data });
   return res.json();

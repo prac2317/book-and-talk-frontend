@@ -6,14 +6,15 @@ import GroupCount from '../group/GroupCount.tsx';
 import styles from './book.module.css';
 import { useParams } from 'react-router-dom';
 import { createContext } from 'react';
+import GroupCreateButton from '../group/GroupCreateButton.tsx';
 
-const IsbnConetex = createContext('');
+const IsbnContext = createContext('');
 
 const BookDetail = () => {
   const { isbn } = useParams();
 
   return (
-    <IsbnConetex.Provider value={isbn}>
+    <IsbnContext.Provider value={isbn}>
       <div className={styles.container}>
         <header className={styles.header}>
           <Header />
@@ -24,12 +25,15 @@ const BookDetail = () => {
             <BookIntro />
           </section>
           <section className={styles.listSection}>
-            <GroupCount />
+            <div className={styles.listHeader}>
+              <GroupCount />
+              <GroupCreateButton />
+            </div>
             <GroupList />
           </section>
         </main>
       </div>
-    </IsbnConetex.Provider>
+    </IsbnContext.Provider>
   );
 };
 

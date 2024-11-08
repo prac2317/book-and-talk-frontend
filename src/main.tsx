@@ -5,6 +5,7 @@ import Home from './pages/home/Home';
 import BookDetail from './pages/book/BookDetail';
 import GroupDetail from './pages/group/GroupDetail';
 import MapSearch from './pages/map/MapSearch.tsx';
+import GroupForm from './pages/group/GroupForm.tsx';
 
 const router = createBrowserRouter([
   {
@@ -18,6 +19,10 @@ const router = createBrowserRouter([
       {
         path: '/books/:isbn',
         element: <BookDetail />,
+      },
+      {
+        path: '/groups/new',
+        element: <GroupForm />,
       },
       {
         path: '/groups/:groupId',

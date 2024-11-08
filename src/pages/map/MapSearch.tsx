@@ -7,7 +7,6 @@ const MapSearch = () => {
 
   const handleSearch = (e: React.FormEvent) => {
     e.preventDefault();
-    // 검색 로직 추가
   };
 
   return (
