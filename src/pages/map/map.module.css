@@ -1,0 +1,44 @@
+.search {
+    margin-top: 10px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    /*position: relative;*/
+    /*z-index: 2;*/
+}
+
+.search form {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    width: 400px;
+    height: 50px;
+    border: solid 1px black;
+    z-index: 2;
+}
+
+.search form button, .search form input {
+    border: none;
+}
+
+.search form button {
+    width: 40px;
+    height: 100%;
+    margin-left: 10px;
+}
+
+.search form input {
+    flex: 1;
+    line-height: 30px;
+    font-size: 16px;
+    outline: none;
+    /*padding: 20px 0px;*/
+}
+
+.map {
+    /*position: absolute;*/
+    z-index: 1;
+    background-color: blue;
+    height: 695px;
+}
