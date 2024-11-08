@@ -5,6 +5,7 @@ import Home from './pages/home/Home';
 import BookDetail from './pages/book/BookDetail';
 import GroupDetail from './pages/group/GroupDetail';
 import MapSearch from './pages/map/MapSearch.tsx';
+import ChatRoom from './pages/chat/ChatRoom.tsx';
 
 const router = createBrowserRouter([
   {
@@ -27,6 +28,10 @@ const router = createBrowserRouter([
         path: '/map',
         element: <MapSearch />,
       },
+      {
+        path: '/chat-room/:chatRoomId',  // 카멜 케이스?
+        element: <ChatRoom />
+      }
     ],
   },
 ]);
