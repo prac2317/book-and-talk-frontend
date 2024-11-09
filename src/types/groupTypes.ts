@@ -9,3 +9,14 @@ export type Group = {
   status: '모집중' | '모집완료';
   bookId: number;
 };
+
+export interface FormData {
+  name: string;
+  maxParticipants: number;
+  startDate: string;
+  duration: number;
+  groupDescription: string;
+  bookId: number | null;
+  location: string | null;
+  groupImage: File | null;
+}
