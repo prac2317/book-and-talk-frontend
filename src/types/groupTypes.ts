@@ -10,6 +10,11 @@ export type Group = {
   bookId: number;
 };
 
+export interface GroupListResponse {
+  totalCount: number;
+  data: Group[];
+}
+
 export interface FormData {
   name: string;
   maxParticipants: number;

@@ -36,7 +36,7 @@ const GroupForm = () => {
         {step === 2 && <Step3 nextStep={nextStep} prevStep={prevStep} handleChange={handleChange} formData={formData} />}
         {step === 3 && <Step4 nextStep={nextStep} prevStep={prevStep} handleChange={handleChange} formData={formData} />}
         {step === 4 && <Step5 nextStep={nextStep} prevStep={prevStep} handleChange={handleChange} formData={formData} />}
-        {step === 5 && <Step6 prevStep={prevStep} formData={formData} />}
+        {step === 5 && <Step6 prevStep={prevStep} formData={formData} setFormData={setFormData}/>}
       </div>
   );
 };
