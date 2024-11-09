@@ -1,18 +1,16 @@
-import { useEffect, useState } from 'react';
+import { useContext, useEffect, useState } from 'react';
 import GroupCard from './GroupCard.tsx';
 import styles from './group.module.css';
 import { getGroupList } from '../../api/getGroupList.ts';
 import { Group } from '../../types/index.ts';
+import { IsbnContext } from '../book/BookDetail.tsx';
 
-type Props = {
-  isbn: string;
-};
-
-const GroupList = ({ isbn }: Props) => {
+const GroupList = () => {
   const [groups, setGroups] = useState<Group[]>([]);
+  const { isbn } = useContext(IsbnContext);
 
   useEffect(() => {
-    const fetchGroups = async (isbn: string): Promise<void> => {
+    const fetchGroups = async (isbn): Promise<void> => {
       try {
         const data: Group[] = await getGroupList(isbn);
         setGroups(data);

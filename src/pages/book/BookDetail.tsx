@@ -8,13 +8,13 @@ import { useParams } from 'react-router-dom';
 import { createContext } from 'react';
 import GroupCreateButton from '../group/GroupCreateButton.tsx';
 
-const IsbnContext = createContext('');
+export const IsbnContext = createContext('');
 
 const BookDetail = () => {
   const { isbn } = useParams();
 
   return (
-    <IsbnContext.Provider value={isbn}>
+    <IsbnContext.Provider value={isbn as string}>
       <div className={styles.container}>
         <header className={styles.header}>
           <Header />
