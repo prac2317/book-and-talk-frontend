@@ -5,13 +5,10 @@ import Home from './pages/home/Home';
 import BookDetail from './pages/book/BookDetail';
 import GroupDetail from './pages/group/GroupDetail';
 import MapSearch from './pages/map/MapSearch.tsx';
-<<<<<<< HEAD
 import GroupForm from './pages/group/GroupForm.tsx';
-=======
 import ChatRoom from './pages/chat/ChatRoom.tsx';
 import ChatList from './pages/chat/ChatList.tsx';
 import Login from './pages/auth/Login.tsx';
->>>>>>> 27c369726998d275dbb2f8dfd7e399999df14618
 
 const router = createBrowserRouter([
   {
