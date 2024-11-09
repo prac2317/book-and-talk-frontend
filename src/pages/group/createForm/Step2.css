@@ -1,0 +1,15 @@
+/* Step2.css */
+
+.input-field {
+    margin-bottom: 15px;
+}
+
+.textarea-field {
+    margin-bottom: 20px;
+}
+
+.instructions {
+    font-size: 14px;
+    color: #666;
+    margin-top: 10px;
+}

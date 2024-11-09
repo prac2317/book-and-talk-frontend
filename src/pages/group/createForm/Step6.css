@@ -1,0 +1,14 @@
+/* Step6.css */
+
+.success-image {
+    width: 150px;
+    height: auto;
+    margin: 20px auto;
+}
+
+.complete-message {
+    font-size: 18px;
+    font-weight: bold;
+    color: #34a853;
+    margin-bottom: 20px;
+}

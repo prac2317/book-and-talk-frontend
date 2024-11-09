@@ -1,0 +1,25 @@
+/* Step5.css */
+
+.participant-options {
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    margin-bottom: 20px;
+}
+
+.participant-button {
+    padding: 10px;
+    margin: 5px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.participant-button.active {
+    background-color: #4285f4;
+    color: white;
+}
+
+.textarea-field {
+    margin-top: 15px;
+}

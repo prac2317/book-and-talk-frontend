@@ -17,6 +17,6 @@ export interface FormData {
   duration: number;
   groupDescription: string;
   bookId: number | null;
-  location: string | null;
+  location: string;
   groupImage: File | null;
 }
