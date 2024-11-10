@@ -1,6 +1,6 @@
 import ky from 'ky';
 import { useState, ChangeEvent, FormEvent } from 'react';
-import { Link } from 'react-router-dom';
+import {Link, useNavigate} from 'react-router-dom';
 import './Login.css';
 
 // 로그인 성공 시 응답 데이터의 타입 정의 (필요에 따라 수정)
@@ -26,6 +26,8 @@ interface LoginResponse {
 // }
 
 const Login: React.FC = () => {
+    const navigate = useNavigate();
+
     const [email, setEmail] = useState<string>('');
     const [password, setPassword] = useState<string>('');
 
@@ -93,6 +95,7 @@ const Login: React.FC = () => {
                 const token = data.token;
                 localStorage.setItem('access_token', token);
                 setIsAuthenticated(true);
+                navigate('/');
             } else if (response.status === 401) {
                 console.error('잘못된 자격 증명');
                 setError('이메일 또는 비밀번호가 올바르지 않습니다.');
@@ -179,7 +182,7 @@ const Login: React.FC = () => {
           </>
         )}
         <img
-          src="/kakao_login_medium_narrow.png" // public 폴더의 이미지 경로는 '/'로 시작
+          src="/kakao_login_medium_narrow.png"
           alt="카카오 로그인"
           onClick={handleKakaoLogin}
           style={{ cursor: 'pointer' }}

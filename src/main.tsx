@@ -10,11 +10,16 @@ import ChatRoom from './pages/chat/ChatRoom.tsx';
 import ChatList from './pages/chat/ChatList.tsx';
 import Login from './pages/auth/Login.tsx';
 import LoginLoading from "./pages/auth/LoginLoading.tsx";
+import PrivateRoute from "./PrivateRoute.tsx";
 
 const router = createBrowserRouter([
   {
     path: '/',
-    element: <AppLayout />,
+    element: (
+        <PrivateRoute>
+          <AppLayout />
+        </PrivateRoute>
+    ),
     children: [
       {
         path: '/',
@@ -44,16 +49,16 @@ const router = createBrowserRouter([
         path: '/chat',
         element: <ChatList />
       },
-      {
-        path: '/login',
-        element: <Login />
-      },
-      {
-        path: '/login-loading',
-        element: <LoginLoading />
-      }
     ],
   },
+  {
+    path: '/login',
+    element: <Login />
+  },
+  {
+    path: '/login-loading',
+    element: <LoginLoading />
+  }
 ]);
 
 createRoot(document.getElementById('root')!).render(<RouterProvider router={router} />);
