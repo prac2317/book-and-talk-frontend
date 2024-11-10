@@ -1,9 +1,7 @@
-import Header from '../../components/Header.tsx';
-import Recommendations from "./Recommendations.tsx";;
 import {useLocation, useNavigate} from "react-router-dom";
 import {useEffect} from "react";
 
-const Home = () => {
+const LoginLoading = () => {
 
     const location = useLocation();
     const navigate = useNavigate();
@@ -17,18 +15,17 @@ const Home = () => {
 
             query.delete('token');
             navigate({
-                pathname: location.pathname,
+                pathname: "/",
                 search: query.toString(),
             }, { replace: true });
         }
     }, [location, navigate]);
 
-  return (
-    <>
-        <Header />
-        <Recommendations />
-    </>
-  );
-};
+    return(
+        <div>
+            로그인 중입니다...
+        </div>
+    )
+}
 
-export default Home;
+export default LoginLoading;

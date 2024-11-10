@@ -34,11 +34,17 @@ const GroupForm = () => {
     setFormData({ ...formData, [input]: e.target.value });
   };
 
+  const handleFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    if (e.target.files && e.target.files[0]) {
+      setFormData({ ...formData, groupImage: e.target.files[0] });
+    }
+  };
+
   return (
       <div className="meeting-creation-container">
         {step === 0 && <Step1 nextStep={nextStep} book={book} />}
         {step === 1 && <Step2 nextStep={nextStep} prevStep={prevStep} handleChange={handleChange} formData={formData} />}
-        {step === 2 && <Step3 nextStep={nextStep} prevStep={prevStep} handleChange={handleChange} formData={formData} />}
+        {step === 2 && <Step3 nextStep={nextStep} prevStep={prevStep} handleChange={handleChange} formData={formData} handleFileChange={handleFileChange} />}
         {step === 3 && <Step4 nextStep={nextStep} prevStep={prevStep} handleChange={handleChange} formData={formData} />}
         {step === 4 && <Step5 nextStep={nextStep} prevStep={prevStep} handleChange={handleChange} formData={formData} />}
         {step === 5 && <Step6 prevStep={prevStep} book={book} formData={formData} setFormData={setFormData}/>}
