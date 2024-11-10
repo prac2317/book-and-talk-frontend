@@ -18,6 +18,7 @@ body, html {
     display: flex;
     flex-direction: row;
     justify-content: center;
+    /*background-color: #fcf7e1;*/
     background-color: #fff;
     width: 100dvw;
     height: 100dvh;

@@ -25,7 +25,6 @@ const BookDetail = () => {
   const [book, setBook] = useState<Book | null>(null); // 책 정보 상태 추가
 
   useEffect(() => {
-    console.log(isbn)
     // isbn을 통해 책 상세 검색
     const fetchBookDetails = async () => {
       if (!isbn) return;
@@ -34,7 +33,7 @@ const BookDetail = () => {
         const kakaoResponse = await ky.get(
             `https://dapi.kakao.com/v3/search/book?target=isbn&query=${isbn}`,
             {
-              headers: { Authorization: 'KakaoAK 7b6213bdc6df67c5716661bf058d0763' },
+              headers: { Authorization: `KakaoAK ${import.meta.env.VITE_KAKAO_REST_API_KEY}` },
             }
         ).json<{ documents: { title: string; authors: string[]; thumbnail: string; publisher: string; datetime: string, isbn: string }[] }>();
 

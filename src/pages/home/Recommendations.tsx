@@ -15,14 +15,18 @@ interface Category {
     books: Book[];
 }
 
+// const API_KEY = import.meta.env.VITE_API_KEY;
+// const API_URL = import.meta.env.VITE_API_URL;
+
 const RecommendationList: React.FC = () => {
+
     const [recommendations, setRecommendations] = useState<Category[]>([]);
     const navigate = useNavigate();
 
     useEffect(() => {
         const fetchRecommendations = async () => {
             try {
-                const response = await ky.get('http://localhost:8080/api/recommendations', {
+                const response = await ky.get(`${import.meta.env.VITE_BASE_URL}/api/recommendations`, {
                     headers: { Authorization: `Bearer ${localStorage.getItem('access_token')}` },
                 }).json<Record<string, { isbn13: string }[]>>();
 
@@ -34,7 +38,7 @@ const RecommendationList: React.FC = () => {
                                     const kakaoResponse = await ky.get(
                                         `https://dapi.kakao.com/v3/search/book?target=isbn&query=${book.isbn13}`,
                                         {
-                                            headers: { Authorization: 'KakaoAK 7b6213bdc6df67c5716661bf058d0763' },
+                                            headers: { Authorization: `KakaoAK ${import.meta.env.VITE_KAKAO_REST_API_KEY}` },
                                         }
                                     ).json<{ documents: { title: string; authors: string[]; thumbnail: string }[] }>();
 
@@ -74,24 +78,21 @@ const RecommendationList: React.FC = () => {
     };
 
     return (
-        <div className="recommendations-container">
-            {recommendations.map((category) => (
-                <div key={category.name} className="category-section">
-                    <h2 className="category-title">{category.name}</h2>
-                    <div className="book-list">
-                        {category.books.map((book, index) => (
-                            <div key={index} className="book-card" onClick={() => handleBookClick(book.isbn)}>
-                                <img src={book.thumbnail} alt={book.title} className="book-thumbnail" />
-                                <div className="book-info">
-                                    <h3 className="book-title">{book.title}</h3>
-                                    <p className="book-author">{book.author}</p>
-                                </div>
-                            </div>
-                        ))}
-                    </div>
+      <div className="recommendations-container">
+        {recommendations.map((category) => (
+          <div key={category.name} className="category-section">
+            <h2 className="category-title">{category.name}</h2>
+            <div className="book-list">
+              {category.books.map((book, index) => (
+                <div key={index} className="book-card" onClick={() => handleBookClick(book.isbn)}>
+                  <img src={book.thumbnail} alt={book.title} className="book-thumbnail" />
+                  <h3 className="book-title">{book.title}</h3>
                 </div>
-            ))}
-        </div>
+              ))}
+            </div>
+          </div>
+        ))}
+      </div>
     );
 };
 

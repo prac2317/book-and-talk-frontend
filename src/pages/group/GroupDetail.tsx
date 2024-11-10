@@ -31,7 +31,7 @@ const GroupDetail: React.FC = () => {
     useEffect(() => {
         const fetchGroupData = async () => {
             try {
-                const data: GroupDetailData = await ky.get(`http://localhost:8080/api/groups/${groupId}`, {
+                const data: GroupDetailData = await ky.get(`${import.meta.env.VITE_BASE_URL}/api/groups/${groupId}`, {
                         headers: {
                             'Authorization': `Bearer ${localStorage.getItem('access_token')}`
                         },
