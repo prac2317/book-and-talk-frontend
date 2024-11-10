@@ -7,6 +7,7 @@ type Props = {
 };
 
 const GroupCard = ({ group }: Props) => {
+    console.log(group);
     const navigate = useNavigate();
 
     const handleClick = () => {
@@ -16,7 +17,7 @@ const GroupCard = ({ group }: Props) => {
   return (
     <div className={styles.card} onClick={handleClick}>
       <section className={styles.imageSection}>
-        <img src="" alt={group.name} />
+        <img src={group.groupImage} alt={group.name} style={{ width: '100px' }} />
       </section>
       <section className={styles.groupInfoSection}>
         <div>{group.name}</div>

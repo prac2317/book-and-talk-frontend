@@ -8,7 +8,7 @@ export type Group = {
   createdAt: Date;
   status: '모집중' | '모집완료';
   bookId: number;
-  groupImageUrl?: string;
+  groupImage: string;
 };
 
 export interface GroupListResponse {
