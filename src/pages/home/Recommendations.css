@@ -1,0 +1,56 @@
+.recommendations-container {
+    padding: 16px;
+    background-color: #f9f9f9;
+}
+
+.category-section {
+    margin-bottom: 24px;
+}
+
+.category-title {
+    font-size: 1.5rem;
+    font-weight: bold;
+    color: #333;
+    margin-bottom: 8px;
+}
+
+.book-list {
+    display: flex;
+    overflow-x: auto;
+    gap: 12px;
+}
+
+.book-card {
+    min-width: 120px;
+    background-color: #fff;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    overflow: hidden;
+    transition: transform 0.2s;
+}
+
+.book-card:hover {
+    transform: scale(1.05);
+}
+
+.book-thumbnail {
+    width: 100%;
+    height: auto;
+}
+
+.book-info {
+    padding: 8px;
+}
+
+.book-title {
+    font-size: 0.9rem;
+    font-weight: bold;
+    color: #555;
+    margin: 0;
+}
+
+.book-author {
+    font-size: 0.8rem;
+    color: #888;
+    margin: 4px 0 0;
+}
