@@ -1,36 +1,65 @@
+// Step6.tsx
 import React from 'react';
 import "../GroupForm.css";
-import "./Step6.css"
-import {FormData} from "../../../types";
+import "./Step6.css";
+import { FormData } from "../../../types";
 import ky from 'ky';
+import {useNavigate} from "react-router-dom";
+
+interface Book {
+    title: string;
+    author: string;
+    thumbnailUrl: string;
+    date: string;
+    publication: string;
+    isbn13: string;
+}
 
 interface Step6Props {
     prevStep: () => void;
     formData: FormData;
     setFormData: React.Dispatch<React.SetStateAction<FormData>>;
+    book: Book | null;
 }
 
-const Step6: React.FC<Step6Props> = ({ prevStep, formData, setFormData }) => {
+const Step6: React.FC<Step6Props> = ({ prevStep, formData, setFormData, book }) => {
+    const navigate = useNavigate();
+
     const submitForm = async () => {
         try {
-            setFormData((prevFormData) => ({...prevFormData, bookId: 3}))
-            console.log(formData.bookId);
-            const response = await ky.post('http://localhost:8080/api/groups/new', {
-                json: formData,
-                headers: {
-                    'Authorization': `Bearer ${localStorage.getItem('access_token')}`, // 토큰이 필요할 경우 헤더에 추가
-                    'Content-Type': 'application/json',
-                },
-            });
+            if (book) {
+                const bookResponse = await ky.post('http://localhost:8080/api/create-book', {
+                    json: {
+                        isbn13: book.isbn13,
+                        thumbnail: book.thumbnailUrl,
+                        bookTitle: book.title
+                    },
+                    headers: {
+                        'Authorization': `Bearer ${localStorage.getItem('access_token')}`,
+                        'Content-Type': 'application/json',
+                    },
+                }).json<{ bookId: number }>();
 
-            if (response.ok) {
-                console.log('클럽이 성공적으로 생성되었습니다.');
+                const bookId = bookResponse.bookId;
+                setFormData((prevFormData) => ({ ...prevFormData, bookId }));
+
+                const groupResponse = await ky.post('http://localhost:8080/api/groups/new', {
+                    json: { ...formData, bookId },
+                    headers: {
+                        'Authorization': `Bearer ${localStorage.getItem('access_token')}`,
+                        'Content-Type': 'application/json',
+                    },
+                });
+
+                if (groupResponse.ok) {
+                    console.log('모임이 성공적으로 생성되었습니다.');
+                    navigate(`/books/${book.isbn13}`);
+                }
             }
         } catch (error) {
-            console.error('클럽 생성 중 오류 발생:', error);
+            console.error('모임 생성 중 오류 발생:', error);
         }
     };
-
 
     return (
         <div className="step-container">

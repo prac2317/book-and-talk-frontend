@@ -8,8 +8,13 @@ import Step6 from "./createForm/Step6.tsx";
 import "./GroupForm.css";
 
 import { FormData} from "../../types";
+import {useLocation} from "react-router-dom";
 
 const GroupForm = () => {
+
+  const { state } = useLocation();
+  const { book } = state || {}; // 전달된 book 정보 추출
+
   const [step, setStep] = useState(0);
   const [formData, setFormData] = useState<FormData>({
     name: '',
@@ -31,12 +36,12 @@ const GroupForm = () => {
 
   return (
       <div className="meeting-creation-container">
-        {step === 0 && <Step1 nextStep={nextStep} />}
+        {step === 0 && <Step1 nextStep={nextStep} book={book} />}
         {step === 1 && <Step2 nextStep={nextStep} prevStep={prevStep} handleChange={handleChange} formData={formData} />}
         {step === 2 && <Step3 nextStep={nextStep} prevStep={prevStep} handleChange={handleChange} formData={formData} />}
         {step === 3 && <Step4 nextStep={nextStep} prevStep={prevStep} handleChange={handleChange} formData={formData} />}
         {step === 4 && <Step5 nextStep={nextStep} prevStep={prevStep} handleChange={handleChange} formData={formData} />}
-        {step === 5 && <Step6 prevStep={prevStep} formData={formData} setFormData={setFormData}/>}
+        {step === 5 && <Step6 prevStep={prevStep} book={book} formData={formData} setFormData={setFormData}/>}
       </div>
   );
 };

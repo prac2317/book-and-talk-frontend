@@ -1,35 +1,42 @@
+// Step1.tsx
 import React from 'react';
 import "../GroupForm.css";
-import "./Step1.css"
+import "./Step1.css";
+
+interface Book {
+    title: string;
+    author: string;
+    thumbnailUrl: string;
+    date: string;
+    publication: string;
+    isbn13: string;
+}
 
 interface Step1Props {
     nextStep: () => void;
+    book: Book | null;
 }
 
-const Step1: React.FC<Step1Props> = ({nextStep}) => {
+const Step1: React.FC<Step1Props> = ({ nextStep, book }) => {
     return (
-      <div className="step-container">
-        <h2>이 책의 모임을 만들까요?</h2>
-        <div className="book-info">
-          <img
-            src="https://search1.kakaocdn.net/thumb/R120x174.q85/?fname=http%3A%2F%2Ft1.daumcdn.net%2Flbook%2Fimage%2F1467038"
-            alt="아주 작은 습관의 힘"
-          />
-          <div className="book-details">
-            <h3>아주 작은 습관의 힘</h3>
-            <p>제임스 클리어</p>
-            <p>2024년 10월 19일</p>
-            <p>비즈니스북스</p>
-          </div>
+        <div className="step-container">
+            <h2>이 책의 모임을 만들까요?</h2>
+            {book && (
+                <div className="book-info">
+                    <img src={book.thumbnailUrl} alt={book.title} />
+                    <div className="book-details">
+                        <h3>{book.title}</h3>
+                        <p>{book.author}</p>
+                        <p>{book.date}</p>
+                        <p>{book.publication}</p>
+                    </div>
+                </div>
+            )}
+            <button className="next-button" onClick={nextStep}>
+                다음
+            </button>
         </div>
-        <button className="next-button" onClick={nextStep}>
-          다음
-        </button>
-      </div>
     );
 };
-
-
-
 
 export default Step1;

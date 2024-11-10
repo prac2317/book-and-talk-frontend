@@ -17,6 +17,7 @@ interface Book {
   thumbnailUrl: string;
   date: string;
   publication: string;
+  isbn13: string;
 }
 
 const BookDetail = () => {
@@ -24,6 +25,7 @@ const BookDetail = () => {
   const [book, setBook] = useState<Book | null>(null); // 책 정보 상태 추가
 
   useEffect(() => {
+    console.log(isbn)
     // isbn을 통해 책 상세 검색
     const fetchBookDetails = async () => {
       if (!isbn) return;
@@ -34,16 +36,19 @@ const BookDetail = () => {
             {
               headers: { Authorization: 'KakaoAK 7b6213bdc6df67c5716661bf058d0763' },
             }
-        ).json<{ documents: { title: string; authors: string[]; thumbnail: string; publisher: string; datetime: string }[] }>();
+        ).json<{ documents: { title: string; authors: string[]; thumbnail: string; publisher: string; datetime: string, isbn: string }[] }>();
 
         if (kakaoResponse.documents.length > 0) {
           const kakaoBook = kakaoResponse.documents[0];
+          const isbn13 = kakaoBook.isbn.match(/\b\d{13}\b/)?.[0] || ''; // isbn13 추출 -> 13자리 수
+
           setBook({
             title: kakaoBook.title,
             author: kakaoBook.authors.join(', '),
             thumbnailUrl: kakaoBook.thumbnail,
             date: new Date(kakaoBook.datetime).toLocaleDateString(),
             publication: kakaoBook.publisher,
+            isbn13: isbn13,
           });
         }
       } catch (error) {
@@ -52,7 +57,7 @@ const BookDetail = () => {
     };
 
     fetchBookDetails();
-  }, [isbn]);
+;  }, [isbn]);
 
   return (
       <IsbnContext.Provider value={isbn as string}>
@@ -68,7 +73,7 @@ const BookDetail = () => {
             <section className={styles.listSection}>
               <div className={styles.listHeader}>
                 <GroupCount />
-                <GroupCreateButton />
+                <GroupCreateButton book={book} />
               </div>
               <GroupList />
             </section>

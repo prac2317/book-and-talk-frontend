@@ -14,6 +14,7 @@ interface Book {
     thumbnailUrl: string;
     date: string;
     publication: string;
+    isbn13: string;
 }
 
 interface BookCardProps {
