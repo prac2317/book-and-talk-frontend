@@ -9,6 +9,7 @@ import GroupForm from './pages/group/GroupForm.tsx';
 import ChatRoom from './pages/chat/ChatRoom.tsx';
 import ChatList from './pages/chat/ChatList.tsx';
 import Login from './pages/auth/Login.tsx';
+import LoginLoading from "./pages/auth/LoginLoading.tsx";
 
 const router = createBrowserRouter([
   {
@@ -47,6 +48,10 @@ const router = createBrowserRouter([
         path: '/login',
         element: <Login />
       },
+      {
+        path: '/login-loading',
+        element: <LoginLoading />
+      }
     ],
   },
 ]);
