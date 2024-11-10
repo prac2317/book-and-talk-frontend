@@ -1,0 +1,53 @@
+.recommendations-container {
+    /*padding: 16px;*/
+    overflow-y: auto;
+    background-color: #ffffff;
+}
+
+.category-section {
+    margin-top:40px;
+    background-color: #FAFAFB;
+    padding: 16px;
+    margin-left: 40px;
+    border : 1px solid #ececed;
+}
+
+.category-title {
+    font-size: 1.5rem;
+    font-weight: bold;
+    color: #333;
+}
+
+.book-list {
+    display: flex;
+    overflow-x: auto;
+    gap: 30px;
+    padding-top: 20px;
+}
+
+.book-card {
+    min-width: 120px;
+    border-radius: 8px;
+    overflow: hidden;
+    transition: transform 0.2s;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 8px;
+}
+
+.book-card:hover {
+    transform: scale(1.05);
+}
+
+.book-thumbnail {
+    width: 120px; /* 가로 크기 */
+    /*height: 170px; !* 세로 크기 *!*/
+    object-fit: cover; /* 이미지 비율에 맞게 잘라내기 */
+}
+
+.book-title {
+    font-size: 0.9rem;
+    font-weight: 300;
+}
+

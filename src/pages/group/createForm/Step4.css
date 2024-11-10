@@ -1,0 +1,21 @@
+/* Step4.css */
+
+.duration-options {
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    margin-bottom: 20px;
+}
+
+.duration-button {
+    padding: 10px;
+    margin: 5px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.duration-button.active {
+    background-color: #4285f4;
+    color: white;
+}

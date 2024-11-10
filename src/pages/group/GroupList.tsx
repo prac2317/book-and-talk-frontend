@@ -7,13 +7,15 @@ import { IsbnContext } from '../book/BookDetail.tsx';
 
 const GroupList = () => {
   const [groups, setGroups] = useState<Group[]>([]);
-  const { isbn } = useContext(IsbnContext);
+  const [totalCount, setTotalCount] = useState<number>(0);
+  const isbn  = useContext(IsbnContext);
 
   useEffect(() => {
-    const fetchGroups = async (isbn): Promise<void> => {
+    const fetchGroups = async (isbn: string): Promise<void> => {
       try {
-        const data: Group[] = await getGroupList(isbn);
+        const { totalCount, data } = await getGroupList(isbn);
         setGroups(data);
+        setTotalCount(totalCount);
       } catch (error) {
         console.error('Failed to fetch groups:', error);
       }
@@ -24,6 +26,7 @@ const GroupList = () => {
 
   return (
     <div className={styles.list}>
+      <h2>{totalCount}</h2>
       {groups.map((group) => (
         <GroupCard key={group.groupId} group={group} />
       ))}

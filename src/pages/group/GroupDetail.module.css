@@ -1,0 +1,80 @@
+
+.container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 16px;
+    max-width: 400px;
+    margin: 0 auto;
+    overflow-y: auto;
+    height: 100vh;
+}
+
+.headerImage {
+    position: relative;
+    width: 100%;
+    height: 200px;
+    background-size: cover;
+    background-position: center;
+    border-radius: 8px;
+    margin-bottom: 16px;
+}
+
+.groupName {
+    position: absolute;
+    bottom: 8px;
+    left: 16px;
+    color: white;
+    background: rgba(0, 0, 0, 0.6);
+    padding: 4px 8px;
+    border-radius: 4px;
+}
+
+.deleteButton {
+    position: absolute;
+    top: 8px;
+    right: 16px;
+    background: transparent;
+    border: none;
+    font-size: 24px;
+    color: white;
+    cursor: pointer;
+}
+
+.overviewSection, .descriptionSection, .membersSection, .locationSection {
+    width: 100%;
+    padding: 16px;
+    margin-bottom: 16px;
+    background-color: #f9f9f9;
+    border-radius: 8px;
+}
+
+.overviewDetails p, .descriptionSection p {
+    margin: 4px 0;
+}
+
+.mapContainer {
+    width: 100%;
+    height: 200px;
+    background-color: #e0e0e0;
+    border-radius: 8px;
+    overflow: hidden;
+}
+
+.footerButtons {
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+    padding: 16px 0;
+}
+
+.button {
+    flex: 1;
+    padding: 12px;
+    margin: 0 4px;
+    background-color: #4285f4;
+    color: white;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+}

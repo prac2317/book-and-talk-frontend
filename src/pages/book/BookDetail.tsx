@@ -5,35 +5,80 @@ import GroupList from '../group/GroupList.tsx';
 import GroupCount from '../group/GroupCount.tsx';
 import styles from './book.module.css';
 import { useParams } from 'react-router-dom';
-import { createContext } from 'react';
+import {createContext, useEffect, useState} from 'react';
 import GroupCreateButton from '../group/GroupCreateButton.tsx';
+import ky from "ky";
 
 export const IsbnContext = createContext('');
 
+interface Book {
+  title: string;
+  author: string;
+  thumbnailUrl: string;
+  date: string;
+  publication: string;
+  isbn13: string;
+}
+
 const BookDetail = () => {
   const { isbn } = useParams();
+  const [book, setBook] = useState<Book | null>(null); // 책 정보 상태 추가
+
+  useEffect(() => {
+    // isbn을 통해 책 상세 검색
+    const fetchBookDetails = async () => {
+      if (!isbn) return;
+
+      try {
+        const kakaoResponse = await ky.get(
+            `https://dapi.kakao.com/v3/search/book?target=isbn&query=${isbn}`,
+            {
+              headers: { Authorization: `KakaoAK ${import.meta.env.VITE_KAKAO_REST_API_KEY}` },
+            }
+        ).json<{ documents: { title: string; authors: string[]; thumbnail: string; publisher: string; datetime: string, isbn: string }[] }>();
+
+        if (kakaoResponse.documents.length > 0) {
+          const kakaoBook = kakaoResponse.documents[0];
+          const isbn13 = kakaoBook.isbn.match(/\b\d{13}\b/)?.[0] || ''; // isbn13 추출 -> 13자리 수
+
+          setBook({
+            title: kakaoBook.title,
+            author: kakaoBook.authors.join(', '),
+            thumbnailUrl: kakaoBook.thumbnail,
+            date: new Date(kakaoBook.datetime).toLocaleDateString(),
+            publication: kakaoBook.publisher,
+            isbn13: isbn13,
+          });
+        }
+      } catch (error) {
+        console.error('Failed to fetch book details', error);
+      }
+    };
+
+    fetchBookDetails();
+;  }, [isbn]);
 
   return (
-    <IsbnContext.Provider value={isbn as string}>
-      <div className={styles.container}>
-        <header className={styles.header}>
-          <Header />
-        </header>
-        <main className={styles.main}>
-          <section className={styles.bookSection}>
-            <BookCard />
-            <BookIntro />
-          </section>
-          <section className={styles.listSection}>
-            <div className={styles.listHeader}>
-              <GroupCount />
-              <GroupCreateButton />
-            </div>
-            <GroupList />
-          </section>
-        </main>
-      </div>
-    </IsbnContext.Provider>
+      <IsbnContext.Provider value={isbn as string}>
+        <div className={styles.container}>
+          <header className={styles.header}>
+            <Header />
+          </header>
+          <main className={styles.main}>
+            <section className={styles.bookSection}>
+              {book ? <BookCard book={book} /> : <p>책 정보를 불러오고 있습니다 </p>}
+              <BookIntro />
+            </section>
+            <section className={styles.listSection}>
+              <div className={styles.listHeader}>
+                <GroupCount />
+                <GroupCreateButton book={book} />
+              </div>
+              <GroupList />
+            </section>
+          </main>
+        </div>
+      </IsbnContext.Provider>
   );
 };
 
