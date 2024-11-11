@@ -15,7 +15,7 @@ const LoginLoading = () => {
 
             query.delete('token');
             navigate({
-                pathname: "/",
+                pathname: "/initial",
                 search: query.toString(),
             }, { replace: true });
         }

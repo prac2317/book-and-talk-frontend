@@ -1,0 +1,12 @@
+.initial-screen {
+    text-align: center;
+    margin-top: 50px;
+}
+
+.kakao-button, .login-button {
+    display: block;
+    margin: 10px auto;
+    padding: 10px 20px;
+    font-size: 16px;
+    cursor: pointer;
+}

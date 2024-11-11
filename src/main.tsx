@@ -12,6 +12,8 @@ import Login from './pages/auth/Login.tsx';
 import LoginLoading from "./pages/auth/LoginLoading.tsx";
 import PrivateRoute from "./PrivateRoute.tsx";
 import ProfilePage from "./pages/profile/ProfilePage.tsx";
+import Register from "./pages/auth/Register.tsx";
+import InitialScreen from "./pages/auth/InitialScreen.tsx";
 
 const router = createBrowserRouter([
   {
@@ -59,6 +61,14 @@ const router = createBrowserRouter([
   {
     path: '/login',
     element: <Login />
+  },
+  {
+    path: '/register',
+    element: <Register />
+  },
+  {
+    path: '/initial',
+    element: <InitialScreen />
   },
   {
     path: '/login-loading',
