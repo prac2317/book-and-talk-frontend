@@ -1,81 +1,73 @@
-/*!* 컨테이너 스타일 *!*/
-/*.login-container {*/
-/*    display: flex;*/
-/*    flex-direction: column;*/
-/*    justify-content: center;*/
-/*    background-color: #fff;*/
-/*    padding: 2rem;*/
-/*    width: 100%;*/
-/*}*/
-
-/*!* 제목 스타일 *!*/
-/*.login-container h2 {*/
-/*    text-align: center;*/
-/*    color: #333;*/
-/*    margin-bottom: 1.5rem;*/
-/*}*/
-
-/*!* 폼 요소 스타일 *!*/
-/*.login-container form {*/
-/*    display: flex;*/
-/*    flex-direction: column;*/
-/*}*/
-
-/*!* 입력 필드 스타일 *!*/
-/*.login-container input[type="email"],*/
-/*.login-container input[type="password"] {*/
-/*    padding: 0.75rem;*/
-/*    margin-bottom: 1rem;*/
-/*    border: 1px solid #ddd;*/
-/*    border-radius: 5px;*/
-/*    font-size: 1rem;*/
-/*    box-sizing: border-box;*/
-/*}*/
-
-/*!* 버튼 스타일 *!*/
-/*.login-container button {*/
-/*    padding: 0.75rem;*/
-/*    font-size: 1rem;*/
-/*    color: #fff;*/
-/*    background-color: #4a90e2;*/
-/*    border: none;*/
-/*    border-radius: 5px;*/
-/*    cursor: pointer;*/
-/*    transition: background-color 0.3s ease;*/
-/*}*/
-
-/*.login-container button:hover {*/
-/*    background-color: #357ab8;*/
-/*}*/
-
-/*!* 레이블 스타일 *!*/
-/*.login-container label {*/
-/*    font-size: 0.9rem;*/
-/*    color: #666;*/
-/*    margin-bottom: 0.5rem;*/
-/*}*/
-
-.login-container {
-    max-width: 300px;
-    margin: 0 auto;
-    padding: 20px;
-    text-align: center;
+/* 배경 색상 설정 */
+body,
+html {
+    background-color: #f0f2f5;
+    /* padding: 20px 500px;  */
+    background-color: #f0f2f5;
 }
 
-input {
+/* 컨테이너 스타일 */
+.login-container {
+    width: 500px;
+    height: 100vh;
+    padding: 50px;
+    text-align: center;
+    background-color: #ffffff;
+    border-radius: 15px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+/* 제목 스타일 */
+.login-container h2 {
+    text-align: center;
+    color: #333;
+    margin-bottom: 1.5rem;
+    margin-top: 4rem;
+    font-size: 1.5rem;
+    /* font-weight: 100; */
+   
+}
+
+/* 입력 필드 스타일 */
+.login-container input[type="email"],
+.login-container input[type="password"] {
     display: block;
     width: 100%;
-    margin: 10px 0;
+    height: 50px;
+    margin: 20px 0;
     padding: 8px;
+    font-size: 0.rem;
+    border-radius: 10px;
+    border: 1px solid #ddd;
+    box-sizing: border-box;
+    background-color: #e6e7e75c;
 }
 
-button {
+/* 버튼 스타일 */
+.login-container button {
     padding: 10px;
     width: 100%;
+    height: 50px;
     margin-top: 10px;
+    border-radius: 10px;
+    background-color: #3182F6;
+    color: #fff;
+    font-size: 1rem;
+    border: none;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    margin-bottom: 20px;
 }
 
+.login-container button:hover {
+    background-color: #2949c6;
+}
+
+
+/* 에러 메시지 스타일 */
 .error {
     color: red;
     margin-top: 10px;
+    font-size: 0.9rem;
 }
+

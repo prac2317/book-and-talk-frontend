@@ -266,18 +266,19 @@ const Login: React.FC = () => {
 
     return (
         <div className="login-container">
-            <h2>로그인</h2>
+            <h2>BOOK & TALK</h2>
+            <h4>-- BOOK CLUB --</h4>
             <form onSubmit={handleSubmit}>
                 <input
                     type="email"
-                    placeholder="이메일"
+                    placeholder="이메일을 입력해주세요"
                     value={email}
                     onChange={(e) => setEmail(e.target.value)}
                     required
                 />
                 <input
                     type="password"
-                    placeholder="비밀번호"
+                    placeholder="비밀번호를 입력해주세요"
                     value={password}
                     onChange={(e) => setPassword(e.target.value)}
                     required
@@ -287,8 +288,11 @@ const Login: React.FC = () => {
                 </button>
                 {error && <p className="error">{error}</p>}
             </form>
-            <Link to="/register">회원가입</Link>
-            <button onClick={() => navigate('/initial')} className="back-button">초기 화면으로 돌아가기</button>
+            <Link to="/register" style={{ color: '#cbd7d7', fontSize: '13px', marginRight: '5px'}}>아이디 찾기 | </Link>
+            <Link to="/register" style={{ color: '#cbd7d7', fontSize: '13px', marginRight: '5px' }}>비밀번호 찾기 | </Link>
+            <Link to="/register" style={{ color: '#cbd7d7', fontSize: '13px' }}>회원가입</Link>
+
+            {/* <button onClick={() => navigate('/initial')} className="back-button">초기 화면으로 돌아가기</button> */}
         </div>
     );
 };
