@@ -14,6 +14,7 @@ import PrivateRoute from "./PrivateRoute.tsx";
 import ProfilePage from "./pages/profile/ProfilePage.tsx";
 import Register from "./pages/auth/Register.tsx";
 import InitialScreen from "./pages/auth/InitialScreen.tsx";
+import ApplyForm from "./pages/group/ApplyForm.tsx";
 
 const router = createBrowserRouter([
   {
@@ -73,6 +74,10 @@ const router = createBrowserRouter([
   {
     path: '/login-loading',
     element: <LoginLoading />
+  },
+  {
+    path: '/applyform',
+    element: <ApplyForm />
   }
 ]);
 
