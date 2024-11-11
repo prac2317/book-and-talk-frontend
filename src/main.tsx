@@ -11,6 +11,7 @@ import ChatList from './pages/chat/ChatList.tsx';
 import Login from './pages/auth/Login.tsx';
 import LoginLoading from "./pages/auth/LoginLoading.tsx";
 import PrivateRoute from "./PrivateRoute.tsx";
+import ProfilePage from "./pages/profile/ProfilePage.tsx";
 
 const router = createBrowserRouter([
   {
@@ -49,6 +50,10 @@ const router = createBrowserRouter([
         path: '/chat',
         element: <ChatList />
       },
+      {
+        path: '/profile',
+        element: <ProfilePage />
+      }
     ],
   },
   {

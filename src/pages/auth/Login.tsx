@@ -178,7 +178,7 @@ const Login: React.FC = () => {
             <p>
               <Link to="/register">회원가입</Link>
             </p>
-            <button onClick={logout}>로그아웃</button>
+            {/*<button onClick={logout}>로그아웃</button>*/}
           </>
         )}
         <img
