@@ -52,47 +52,60 @@ const GroupDetail: React.FC = () => {
 
     return (
         <>
-        <div className={styles.headerImage}>
-        </div>
-        <div className={styles.container}>
-            <div className={styles.headerImage}
-                 style={{backgroundImage: `url(${overview.groupImage || 'default-image-url'})`}}>
+
+            <img src="../../../public/icon/Group-image.jpg" alt="그룹 이미지" className={styles.headerImage}/>
+            {/*<div className={styles.headerImage}>*/}
+            {/*</div>*/}
+            <div className={styles.container}>
+                {/*<div className={styles.headerImage}*/}
+                {/*     style={{backgroundImage: `url(${overview.groupImage || 'default-image-url'})`}}>*/}
+                {/*</div>*/}
+                <div className={styles.header}>
+                    하하
+                    <div className={styles.headerIcons}>
+                        <div>
+                            버튼1
+                        </div>
+                        <div>
+                            버튼2
+                        </div>
+                    </div>
+                </div>
+                <div className={styles.groupNameBox}>{overview.name}</div>
+
+                <section className={styles.overviewBox}>
+                    <h4>모임 개요</h4>
+                    <div className={styles.overviewDetail}>
+                        <p>책: {overview.name}</p>
+                        <p>날짜: {new Date(overview.startDate).toLocaleDateString()}</p>
+                        <p>참여자: {overview.participants}/{overview.maxParticipants}</p>
+                    </div>
+                </section>
+
+                <section className={styles.introduceBox}>
+                    <h4>소개글</h4>
+                    <p className={styles.introduceDetail}>{groupDescription}</p>
+                </section>
+
+                <section className={styles.memberBox}>
+                    <div className={styles.member}>
+                        <h4>참여 멤버</h4>
+                        <span>{overview.participants}/{overview.maxParticipants}</span>
+                    </div>
+                    <div className={styles.memberDetail}>참여자 목록</div>
+                </section>
+
+                <section className={styles.mapBox}>
+                    <h4>지역</h4>
+                    <div className={styles.mapContainer}>
+                        <img src="../../../public/icon/Map-example.png" alt="map"/>
+                    </div>
+                </section>
+
+                <div className={styles.footerButtons}>
+                    <button className={styles.button}>신청자 목록</button>
+                </div>
             </div>
-            <div className={styles.groupNameBox}>{overview.name}</div>
-
-            <section className={styles.overviewBox}>
-                <h4>모임 개요</h4>
-                <div className={styles.overviewDetail}>
-                    <p>책: {overview.name}</p>
-                    <p>날짜: {new Date(overview.startDate).toLocaleDateString()}</p>
-                    <p>참여자: {overview.participants}/{overview.maxParticipants}</p>
-                </div>
-            </section>
-
-            <section className={styles.introduceBox}>
-                <h4>소개글</h4>
-                <p className={styles.introduceDetail}>{groupDescription}</p>
-            </section>
-
-            <section className={styles.memberBox}>
-                <div className={styles.member}>
-                    <h4>참여 멤버</h4>
-                    <span>{overview.participants}/{overview.maxParticipants}</span>
-                </div>
-                <div className={styles.memberDetail}>참여자 목록</div>
-            </section>
-
-            <section className={styles.mapBox}>
-                <h4>지역</h4>
-                <div className={styles.mapContainer}>
-                    <img src="map-placeholder-url" alt="map"/>
-                </div>
-            </section>
-
-            <div className={styles.footerButtons}>
-                <button className={styles.button}>신청자 목록</button>
-            </div>
-        </div>
         </>
     );
 };
