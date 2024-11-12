@@ -5,9 +5,9 @@ import GroupList from '../group/GroupList.tsx';
 import GroupCount from '../group/GroupCount.tsx';
 import styles from './book.module.css';
 import { useParams } from 'react-router-dom';
-import React, {createContext, useEffect, useState} from 'react';
+import React, { createContext, useEffect, useState } from 'react';
 import GroupCreateButton from '../group/GroupCreateButton.tsx';
-import ky from "ky";
+import ky from 'ky';
 
 export const IsbnContext = createContext('');
 
@@ -35,12 +35,20 @@ const BookDetail = () => {
       if (!isbn) return;
 
       try {
-        const kakaoResponse = await ky.get(
-            `https://dapi.kakao.com/v3/search/book?target=isbn&query=${isbn}`,
-            {
-              headers: { Authorization: `KakaoAK ${import.meta.env.VITE_KAKAO_REST_API_KEY}` },
-            }
-        ).json<{ documents: { title: string; authors: string[]; thumbnail: string; publisher: string; datetime: string, isbn: string }[] }>();
+        const kakaoResponse = await ky
+          .get(`https://dapi.kakao.com/v3/search/book?target=isbn&query=${isbn}`, {
+            headers: { Authorization: `KakaoAK ${import.meta.env.VITE_KAKAO_REST_API_KEY}` },
+          })
+          .json<{
+            documents: {
+              title: string;
+              authors: string[];
+              thumbnail: string;
+              publisher: string;
+              datetime: string;
+              isbn: string;
+            }[];
+          }>();
 
         if (kakaoResponse.documents.length > 0) {
           const kakaoBook = kakaoResponse.documents[0];
@@ -61,23 +69,25 @@ const BookDetail = () => {
     };
 
     fetchBookDetails();
-;  }, [isbn]);
+  }, [isbn]);
 
   const toggleLike = async () => {
     try {
-      const response: isLiked = await ky.post(`${import.meta.env.VITE_BASE_URL}/api/book/like`, {
-        json: {
-          bookTitle: book?.title,
-          author:book?.author,
-          thumbnail: book?.thumbnailUrl,
-          publishDate: book?.date,
-          publication: book?.publication,
-          isbn13: book?.isbn13
-        },
-        headers: {
-          'Authorization': `Bearer ${localStorage.getItem('access_token')}`
-        }
-      }).json();
+      const response: isLiked = await ky
+        .post(`${import.meta.env.VITE_BASE_URL}/api/book/like`, {
+          json: {
+            bookTitle: book?.title,
+            author: book?.author,
+            thumbnail: book?.thumbnailUrl,
+            publishDate: book?.date,
+            publication: book?.publication,
+            isbn13: book?.isbn13,
+          },
+          headers: {
+            Authorization: `Bearer ${localStorage.getItem('access_token')}`,
+          },
+        })
+        .json();
       const result = response.isLiked;
       console.log(result);
       if (result === true) {

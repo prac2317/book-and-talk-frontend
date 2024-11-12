@@ -9,22 +9,22 @@ import GroupForm from './pages/group/GroupForm.tsx';
 import ChatRoom from './pages/chat/ChatRoom.tsx';
 import ChatList from './pages/chat/ChatList.tsx';
 import Login from './pages/auth/Login.tsx';
-import LoginLoading from "./pages/auth/LoginLoading.tsx";
-import PrivateRoute from "./PrivateRoute.tsx";
-import ProfilePage from "./pages/profile/ProfilePage.tsx";
-import Register from "./pages/auth/Register.tsx";
-import InitialScreen from "./pages/auth/InitialScreen.tsx";
-import ApplyForm from "./pages/group/ApplyForm.tsx";
-import ApplySuccess from "./pages/group/ApplySuccess.tsx";
-import NotificationWindow from "./pages/notification/NotificationWindow.tsx";
+import LoginLoading from './pages/auth/LoginLoading.tsx';
+import PrivateRoute from './PrivateRoute.tsx';
+import ProfilePage from './pages/profile/ProfilePage.tsx';
+import Register from './pages/auth/Register.tsx';
+import InitialScreen from './pages/auth/InitialScreen.tsx';
+import ApplyForm from './pages/group/ApplyForm.tsx';
+import ApplySuccess from './pages/group/ApplySuccess.tsx';
+import NotificationWindow from './pages/notification/NotificationWindow.tsx';
 
 const router = createBrowserRouter([
   {
     path: '/',
     element: (
-        <PrivateRoute>
-          <AppLayout />
-        </PrivateRoute>
+      <PrivateRoute>
+        <AppLayout />
+      </PrivateRoute>
     ),
     children: [
       {
@@ -49,46 +49,46 @@ const router = createBrowserRouter([
       },
       {
         path: '/chat/:chatRoomId',
-        element: <ChatRoom />
+        element: <ChatRoom />,
       },
       {
         path: '/chat',
-        element: <ChatList />
+        element: <ChatList />,
       },
       {
         path: '/profile',
-        element: <ProfilePage />
-      }
+        element: <ProfilePage />,
+      },
     ],
   },
   {
     path: '/login',
-    element: <Login />
+    element: <Login />,
   },
   {
     path: '/register',
-    element: <Register />
+    element: <Register />,
   },
   {
     path: '/initial',
-    element: <InitialScreen />
+    element: <InitialScreen />,
   },
   {
     path: '/login-loading',
-    element: <LoginLoading />
+    element: <LoginLoading />,
   },
   {
     path: '/applyform',
-    element: <ApplyForm />
+    element: <ApplyForm />,
   },
   {
     path: '/apply-success',
-    element: <ApplySuccess />
+    element: <ApplySuccess />,
   },
   {
     path: '/notificationWindow',
-    element: <NotificationWindow />
-  }
+    element: <NotificationWindow />,
+  },
 ]);
 
 createRoot(document.getElementById('root')!).render(<RouterProvider router={router} />);

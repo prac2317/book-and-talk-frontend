@@ -9,32 +9,32 @@ import styles from './book.module.css';
 //   publication: '비즈니스북스',
 // };
 interface Book {
-    title: string;
-    author: string;
-    thumbnailUrl: string;
-    date: string;
-    publication: string;
-    isbn13: string;
+  title: string;
+  author: string;
+  thumbnailUrl: string;
+  date: string;
+  publication: string;
+  isbn13: string;
 }
 
 interface BookCardProps {
-    book: Book;
+  book: Book;
 }
 
 const BookCard: React.FC<BookCardProps> = ({ book }) => {
-    return (
-        <div className={styles.card}>
-            <section className={styles.imageSection}>
-                <img src={book.thumbnailUrl} alt={book.title} />
-            </section>
-            <section className={styles.bookInfoSection}>
-                <h3>{book.title}</h3>
-                <div>{book.author}</div>
-                <div>{book.date}</div>
-                <div>{book.publication}</div>
-            </section>
-        </div>
-    );
+  return (
+    <div className={styles.card}>
+      <section className={styles.imageSection}>
+        <img src={book.thumbnailUrl} alt={book.title} />
+      </section>
+      <section className={styles.bookInfoSection}>
+        <h3>{book.title}</h3>
+        <div>{book.author}</div>
+        <div>{book.date}</div>
+        <div>{book.publication}</div>
+      </section>
+    </div>
+  );
 };
 
 export default BookCard;

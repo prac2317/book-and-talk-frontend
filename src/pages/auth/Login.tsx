@@ -201,100 +201,104 @@ import './Login.css';
 
 // 로그인 성공 시 응답 데이터의 타입 정의 (필요에 따라 수정)
 interface LoginResponse {
-    // 예시 필드
-    token: string;
-    user: {
-        id: number;
-        email: string;
-        nickname: string;
-    };
+  // 예시 필드
+  token: string;
+  user: {
+    id: number;
+    email: string;
+    nickname: string;
+  };
 }
 
 const Login: React.FC = () => {
-    const navigate = useNavigate();
-    const [email, setEmail] = useState('');
-    const [password, setPassword] = useState('');
-    const [error, setError] = useState('');
-    const [isLoading, setIsLoading] = useState(false);
-    // const [isAuthenticated, setIsAuthenticated] = useState<boolean>(false);
+  const navigate = useNavigate();
+  const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('');
+  const [error, setError] = useState('');
+  const [isLoading, setIsLoading] = useState(false);
+  // const [isAuthenticated, setIsAuthenticated] = useState<boolean>(false);
 
+  const handleSubmit = async (e: FormEvent) => {
+    e.preventDefault();
+    await loginUser();
 
-    const handleSubmit = async (e: FormEvent) => {
-        e.preventDefault();
-        await loginUser();
+    // 로그인 로직 구현
+    navigate('/initial');
+  };
+  //
+  const loginUser = async () => {
+    setIsLoading(true);
+    setError('');
+    try {
+      console.log('이메일:', email);
+      console.log('비밀번호:', password);
 
-        // 로그인 로직 구현
-        navigate('/initial');
-    };
-//
-    const loginUser = async () => {
-        setIsLoading(true);
-        setError('');
-        try {
-            console.log('이메일:', email);
-            console.log('비밀번호:', password);
+      // 로그인 요청을 위한 POST 요청
+      const response = await ky.post<LoginResponse>(`${import.meta.env.VITE_BASE_URL}/login`, {
+        credentials: 'include', // 쿠키 포함
+        json: { email, password }, // JSON 페이로드 전송
+        throwHttpErrors: false, // 2xx가 아닌 응답에서도 에러를 던지지 않음
+      });
 
-            // 로그인 요청을 위한 POST 요청
-            const response = await ky.post<LoginResponse>(`${import.meta.env.VITE_BASE_URL}/login`, {
-                credentials: 'include', // 쿠키 포함
-                json: { email, password }, // JSON 페이로드 전송
-                throwHttpErrors: false,   // 2xx가 아닌 응답에서도 에러를 던지지 않음
-            });
+      if (response.status === 200) {
+        const data: LoginResponse = await response.json();
+        console.log('로그인 성공:', data);
+        const token = data.token;
+        localStorage.setItem('access_token', token);
+        // setIsAuthenticated(true);
+        navigate('/');
+      } else if (response.status === 401) {
+        console.error('잘못된 자격 증명');
+        setError('이메일 또는 비밀번호가 올바르지 않습니다.');
+      } else {
+        console.error(`예상치 못한 응답 상태: ${response.status}`);
+        setError('알 수 없는 오류가 발생했습니다.');
+      }
+    } catch (error) {
+      console.error('로그인 중 오류:', error);
+      setError('로그인 중 오류가 발생했습니다.');
+    } finally {
+      setIsLoading(false);
+    }
+  };
 
-            if (response.status === 200) {
+  return (
+    <div className="login-container">
+      <h2>BOOK & TALK</h2>
+      <h4>-- BOOK CLUB --</h4>
+      <form onSubmit={handleSubmit}>
+        <input
+          type="email"
+          placeholder="이메일을 입력해주세요"
+          value={email}
+          onChange={(e) => setEmail(e.target.value)}
+          required
+        />
+        <input
+          type="password"
+          placeholder="비밀번호를 입력해주세요"
+          value={password}
+          onChange={(e) => setPassword(e.target.value)}
+          required
+        />
+        <button type="submit" disabled={isLoading}>
+          {isLoading ? '로그인 중...' : '로그인'}
+        </button>
+        {error && <p className="error">{error}</p>}
+      </form>
+      <Link to="/register" style={{ color: '#cbd7d7', fontSize: '13px', marginRight: '5px' }}>
+        아이디 찾기 |{' '}
+      </Link>
+      <Link to="/register" style={{ color: '#cbd7d7', fontSize: '13px', marginRight: '5px' }}>
+        비밀번호 찾기 |{' '}
+      </Link>
+      <Link to="/register" style={{ color: '#cbd7d7', fontSize: '13px' }}>
+        회원가입
+      </Link>
 
-                const data: LoginResponse = await response.json();
-                console.log('로그인 성공:', data);
-                const token = data.token;
-                localStorage.setItem('access_token', token);
-                // setIsAuthenticated(true);
-                navigate('/');
-            } else if (response.status === 401) {
-                console.error('잘못된 자격 증명');
-                setError('이메일 또는 비밀번호가 올바르지 않습니다.');
-            } else {
-                console.error(`예상치 못한 응답 상태: ${response.status}`);
-                setError('알 수 없는 오류가 발생했습니다.');
-            }
-        } catch (error) {
-            console.error('로그인 중 오류:', error);
-            setError('로그인 중 오류가 발생했습니다.');
-        } finally {
-            setIsLoading(false);
-        }
-    };
-
-    return (
-        <div className="login-container">
-            <h2>BOOK & TALK</h2>
-            <h4>-- BOOK CLUB --</h4>
-            <form onSubmit={handleSubmit}>
-                <input
-                    type="email"
-                    placeholder="이메일을 입력해주세요"
-                    value={email}
-                    onChange={(e) => setEmail(e.target.value)}
-                    required
-                />
-                <input
-                    type="password"
-                    placeholder="비밀번호를 입력해주세요"
-                    value={password}
-                    onChange={(e) => setPassword(e.target.value)}
-                    required
-                />
-                <button type="submit" disabled={isLoading}>
-                    {isLoading ? '로그인 중...' : '로그인'}
-                </button>
-                {error && <p className="error">{error}</p>}
-            </form>
-            <Link to="/register" style={{ color: '#cbd7d7', fontSize: '13px', marginRight: '5px'}}>아이디 찾기 | </Link>
-            <Link to="/register" style={{ color: '#cbd7d7', fontSize: '13px', marginRight: '5px' }}>비밀번호 찾기 | </Link>
-            <Link to="/register" style={{ color: '#cbd7d7', fontSize: '13px' }}>회원가입</Link>
-
-            {/* <button onClick={() => navigate('/initial')} className="back-button">초기 화면으로 돌아가기</button> */}
-        </div>
-    );
+      {/* <button onClick={() => navigate('/initial')} className="back-button">초기 화면으로 돌아가기</button> */}
+    </div>
+  );
 };
 
 export default Login;

@@ -30,29 +30,29 @@ const navigations = [
 
 const Navigation = () => {
   return (
-      <div className={styles.nav}>
-        {navigations.map((nav) => (
-            <NavLink
-                key={nav.to}
-                to={nav.to}
-                end
-                className={({ isActive }) =>
-                    isActive ? `${styles.navItem} ${styles.active}` : styles.navItem
-                }
-            >
-              {({ isActive }) => (
-                  <>
-                    <img
-                        src={isActive ? nav.activeIcon : nav.inactiveIcon}
-                        alt={nav.label}
-                        className={`${styles.navIcon} ${isActive ? 'active' : 'inactive'}`}
-                    />
-                    <span className={isActive ? styles.active : ''}>{nav.label}</span>
-                  </>
-              )}
-            </NavLink>
-        ))}
-      </div>
+    <div className={styles.nav}>
+      {navigations.map((nav) => (
+        <NavLink
+          key={nav.to}
+          to={nav.to}
+          end
+          className={({ isActive }) =>
+            isActive ? `${styles.navItem} ${styles.active}` : styles.navItem
+          }
+        >
+          {({ isActive }) => (
+            <>
+              <img
+                src={isActive ? nav.activeIcon : nav.inactiveIcon}
+                alt={nav.label}
+                className={`${styles.navIcon} ${isActive ? 'active' : 'inactive'}`}
+              />
+              <span className={isActive ? styles.active : ''}>{nav.label}</span>
+            </>
+          )}
+        </NavLink>
+      ))}
+    </div>
   );
 };
 

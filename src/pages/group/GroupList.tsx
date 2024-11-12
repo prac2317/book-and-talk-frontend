@@ -8,7 +8,7 @@ import { IsbnContext } from '../book/BookDetail.tsx';
 const GroupList = () => {
   const [groups, setGroups] = useState<Group[]>([]);
   const [totalCount, setTotalCount] = useState<number>(0);
-  const isbn  = useContext(IsbnContext);
+  const isbn = useContext(IsbnContext);
 
   useEffect(() => {
     const fetchGroups = async (isbn: string): Promise<void> => {
