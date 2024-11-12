@@ -31,9 +31,12 @@ const Step6: React.FC<Step6Props> = ({ prevStep, formData, setFormData, book }) 
             if (book) {
                 const bookResponse = await ky.post(`${import.meta.env.VITE_BASE_URL}/api/create-book`, {
                     json: {
-                        isbn13: book.isbn13,
+                        bookTitle: book.title,
+                        author:book.author,
                         thumbnail: book.thumbnailUrl,
-                        bookTitle: book.title
+                        publishDate: book.date,
+                        publication: book.publication,
+                        isbn13: book.isbn13
                     },
                     headers: {
                         'Authorization': `Bearer ${localStorage.getItem('access_token')}`,
@@ -43,6 +46,7 @@ const Step6: React.FC<Step6Props> = ({ prevStep, formData, setFormData, book }) 
 
                 const bookId = bookResponse.bookId;
                 setFormData((prevFormData) => ({ ...prevFormData, bookId }));
+                console.log(book);
 
                 // const groupResponse = await ky.post(`${import.meta.env.VITE_BASE_URL}/api/groups/new`, {
                 //     json: { ...formData, bookId },

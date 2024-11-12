@@ -39,11 +39,16 @@ interface applicantData {
     data: Applicant[];
 }
 
+interface isLiked {
+    isLiked: boolean;
+}
+
 const GroupDetail: React.FC = () => {
     const { groupId } = useParams<{ groupId: string }>();
     const [groupData, setGroupData] = useState<GroupDetailData | null>(null);
     const [applicants, setApplicants] = useState<applicantData>([]);
     const [isModalOpen, setIsModalOpen] = useState(false);
+    const [isLiked, setIsLiked] = useState<boolean>(false);
     const navigate = useNavigate();
 
     useEffect(() => {
@@ -56,6 +61,9 @@ const GroupDetail: React.FC = () => {
                     }
                 ).json();
                 setGroupData(data);
+                if (groupData?.like) {
+                    setIsLiked(true);
+                }
             } catch (error) {
                 console.error('Failed to fetch group details:', error);
             }
@@ -80,6 +88,7 @@ const GroupDetail: React.FC = () => {
         }
     };
 
+
     if (!groupData) return <p>Loading...</p>;
 
     const { overview, groupDescription, isParticipant, like } = groupData;
@@ -89,65 +98,107 @@ const GroupDetail: React.FC = () => {
         navigate('/applyform', { state: { groupId, groupName } });
     };
 
+    const toggleLike = async () => {
+        try {
+            const response: isLiked = await ky.post(`${import.meta.env.VITE_BASE_URL}/api/groups/like/${groupId}`, {
+                headers: {
+                    'Authorization': `Bearer ${localStorage.getItem('access_token')}`
+                }
+            }).json();
+            const result = response.isLiked;
+            console.log(result);
+            if (result === true) {
+                setIsLiked(true);
+            } else {
+                setIsLiked(false);
+            }
+            // setGroupData((prevData) =>
+            //     prevData ? { ...prevData, like: response.isLiked } : prevData
+            // );
+        } catch (error) {
+            console.error('Failed to toggle like:', error);
+        }
+    };
+
     return (
-        <>
-            <img src="../../../public/icon/Group-image.jpg" alt="그룹 이미지" className={styles.headerImage}/>
-            <div className={styles.container}>
-                <div className={styles.header}>
-                    <button onClick={() => navigate(-1)}>뒤로가기</button>
-                    <div className={styles.headerIcons}>
-                        {isParticipant === "HOST" ? (
-                            <>
-                                <button>삭제</button>
-                                <button>수정</button>
-                            </>
-                        ) : (
-                            <button>좋아요</button>
-                        )}
-                    </div>
-                </div>
-                <div className={styles.groupNameBox}>{overview?.name}</div>
-
-                <section className={styles.overviewBox}>
-                    <h4>모임 개요</h4>
-                    <div className={styles.overviewDetail}>
-                        <p>책: {overview.name}</p>
-                        <p>날짜: {new Date(overview.startDate).toLocaleDateString()}</p>
-                        <p>참여자: {overview.participants}/{overview.maxParticipants}</p>
-                    </div>
-                </section>
-
-                <section className={styles.introduceBox}>
-                    <h4>소개글</h4>
-                    <p className={styles.introduceDetail}>{groupDescription}</p>
-                </section>
-
-                <section className={styles.memberBox}>
-                    <div className={styles.member}>
-                        <h4>참여 멤버</h4>
-                        <span>{overview.participants}/{overview.maxParticipants}</span>
-                    </div>
-                    <div className={styles.memberDetail}>참여자 목록</div>
-                </section>
-
-                <section className={styles.mapBox}>
-                    <h4>지역</h4>
-                    <div className={styles.mapContainer}>
-                        <img src="../../../public/icon/Map-example.png" alt="map"/>
-                    </div>
-                </section>
-
-                <div className={styles.footerButtons}>
-                    {isParticipant === "HOST" && <button className={styles.button} onClick={handleApplicantListClick}>신청자 목록</button>}
-                    {isParticipant === "PARTICIPANT" && <button className={styles.button}>채팅하러 가기</button>}
-                    {isParticipant === "APPLIED" && <button className={styles.button}>신청 취소</button>}
-                    {(!isParticipant || isParticipant === "NONE") && (
-                        <button className={styles.button}  onClick={handleApplyClick}>가입 신청</button>
-                    )}
-                </div>
+      <>
+        <img
+          src="../../../public/icon/Group-image.jpg"
+          alt="그룹 이미지"
+          className={styles.headerImage}
+        />
+        <div className={styles.container}>
+          <div className={styles.header}>
+            <button onClick={() => navigate(-1)}>뒤로가기</button>
+            <div className={styles.headerIcons}>
+              {isParticipant === 'HOST' ? (
+                <>
+                  <button>삭제</button>
+                  <button>수정</button>
+                </>
+              ) : (
+                <button onClick={toggleLike}>
+                  {isLiked ? '❤️' : '🤍'}
+                </button>
+              )}
             </div>
-            {isModalOpen && <ApplicantListModal applicants={applicants} onClose={() => setIsModalOpen(false)} />}
-        </>
+          </div>
+          <div className={styles.groupNameBox}>{overview?.name}</div>
+
+          <section className={styles.overviewBox}>
+            <h4>모임 개요</h4>
+            <div className={styles.overviewDetail}>
+              <p>책: {overview.name}</p>
+              <p>날짜: {new Date(overview.startDate).toLocaleDateString()}</p>
+              <p>
+                참여자: {overview.participants}/{overview.maxParticipants}
+              </p>
+            </div>
+          </section>
+
+          <section className={styles.introduceBox}>
+            <h4>소개글</h4>
+            <p className={styles.introduceDetail}>{groupDescription}</p>
+          </section>
+
+          <section className={styles.memberBox}>
+            <div className={styles.member}>
+              <h4>참여 멤버</h4>
+              <span>
+                {overview.participants}/{overview.maxParticipants}
+              </span>
+            </div>
+            <div className={styles.memberDetail}>참여자 목록</div>
+          </section>
+
+          <section className={styles.mapBox}>
+            <h4>지역</h4>
+            <div className={styles.mapContainer}>
+              <img src="../../../public/icon/Map-example.png" alt="map" />
+            </div>
+          </section>
+
+          <div className={styles.footerButtons}>
+            {isParticipant === 'HOST' && (
+              <button className={styles.button} onClick={handleApplicantListClick}>
+                신청자 목록
+              </button>
+            )}
+            {isParticipant === 'PARTICIPANT' && (
+              <button className={styles.button}>채팅하러 가기</button>
+            )}
+            {isParticipant === 'APPLIED' && <button className={styles.button}>신청 취소</button>}
+            {(!isParticipant || isParticipant === 'NONE') && (
+              <button className={styles.button} onClick={handleApplyClick}>
+                가입 신청
+              </button>
+            )}
+          </div>
+        </div>
+        {isModalOpen && (
+          <ApplicantListModal applicants={applicants} onClose={() => setIsModalOpen(false)} />
+        )}
+      </>
     );
 };
 
