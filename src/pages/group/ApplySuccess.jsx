@@ -1,11 +1,15 @@
 import React from "react";
 import styles from "./ApplySuccess.module.css";
+import {useLocation, useNavigate} from "react-router-dom";
 
 
 const ApplySuccess = () => {
+    const location = useLocation();
+    const { groupId } = location.state || {};
+    const navigate = useNavigate();
 
     const handleSubmit = () => {
-        console.log("submit");
+        navigate(`/groups/${groupId}`);
     };
 
     return (

@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import ky from 'ky';
 import styles from "./ApplyForm.module.css";
+import {useLocation, useNavigate} from "react-router-dom";
 
 type ApplyRequest = {
     questionAnswer: string;
@@ -8,22 +9,26 @@ type ApplyRequest = {
 };
 
 const ApplyForm: React.FC = () => {
+    const navigate = useNavigate();
     const [questionAnswer, setQuestionAnswer] = useState('');
     const [submissionMessage, setSubmissionMessage] = useState('');
     const maxCharCount = 200;
 
+    const location = useLocation();
+    const { groupId, groupName } = location.state || {};
+
     const handleSubmit = async () => {
         try {
-            const groupId = 1; // Replace with actual groupId or fetch dynamically
             const data: ApplyRequest = { questionAnswer, groupId };
 
-            await ky.post(`${import.meta.env.VITE_BASE_URL}/application/apply`, {
+            await ky.post(`${import.meta.env.VITE_BASE_URL}/api/application/apply`, {
                 json: data,
                 headers: {
                     Authorization: `Bearer ${localStorage.getItem('access_token')}`,
                 },
             });
             setSubmissionMessage('참가 신청이 완료되었습니다.');
+            navigate("/apply-success", { state: { groupId } })
             console.log(submissionMessage);
         } catch (error) {
             setSubmissionMessage('신청 중 오류가 발생했습니다.' + error);
@@ -44,7 +49,7 @@ const ApplyForm: React.FC = () => {
           </div>
           <div className={styles.groupInfo}>
             <div className={styles.sectionTitle}>가입 신청한 모임 이름</div>
-            <div className={styles.titleInput}>북토피아 북클럽</div>
+            <div className={styles.titleInput}>{groupName}</div>
           </div>
           <div className={styles.groupQuestion}>
             <p>저희 모임은 책을 읽고 독후감을 작성하는 모임입니다. </p>

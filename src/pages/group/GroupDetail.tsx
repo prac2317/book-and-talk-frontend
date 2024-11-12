@@ -1,7 +1,8 @@
 import React, { useEffect, useState } from 'react';
-import { useParams } from 'react-router-dom';
+import {useNavigate, useParams} from 'react-router-dom';
 import ky from 'ky';
 import styles from './GroupDetail.module.css';
+import ApplicantListModal from "./ApplicantListModal.tsx";
 
 interface GroupOverview {
     groupId: number;
@@ -24,9 +25,25 @@ interface GroupDetailData {
     like: boolean;
 }
 
+interface Applicant {
+    id: number;
+    applicationId: number;
+    nickname: string;
+    createdAt: string;
+    questionAnswer: string;
+    profileImageUrl: string;
+}
+
+interface applicantData {
+    data: Applicant[];
+}
+
 const GroupDetail: React.FC = () => {
     const { groupId } = useParams<{ groupId: string }>();
     const [groupData, setGroupData] = useState<GroupDetailData | null>(null);
+    const [applicants, setApplicants] = useState<applicantData>([]);
+    const [isModalOpen, setIsModalOpen] = useState(false);
+    const navigate = useNavigate();
 
     useEffect(() => {
         const fetchGroupData = async () => {
@@ -46,32 +63,48 @@ const GroupDetail: React.FC = () => {
         fetchGroupData();
     }, [groupId]);
 
+    const handleApplicantListClick = async () => {
+        try {
+            const applicantData: applicantData = await ky.get(`${import.meta.env.VITE_BASE_URL}/api/application`, {
+                searchParams: { groupId },
+                headers: {
+                    'Authorization': `Bearer ${localStorage.getItem('access_token')}`
+                },
+            }).json();
+            setApplicants(applicantData);
+            setIsModalOpen(true);
+        } catch (error) {
+            console.error('Failed to fetch applicant list:', error);
+        }
+    };
+
     if (!groupData) return <p>Loading...</p>;
 
     const { overview, groupDescription, isParticipant, like } = groupData;
 
+    const handleApplyClick = () => {
+        const groupName = overview?.name;
+        navigate('/applyform', { state: { groupId, groupName } });
+    };
+
     return (
         <>
-
             <img src="../../../public/icon/Group-image.jpg" alt="그룹 이미지" className={styles.headerImage}/>
-            {/*<div className={styles.headerImage}>*/}
-            {/*</div>*/}
             <div className={styles.container}>
-                {/*<div className={styles.headerImage}*/}
-                {/*     style={{backgroundImage: `url(${overview.groupImage || 'default-image-url'})`}}>*/}
-                {/*</div>*/}
                 <div className={styles.header}>
-                    하하
+                    <button onClick={() => navigate(-1)}>뒤로가기</button>
                     <div className={styles.headerIcons}>
-                        <div>
-                            버튼1
-                        </div>
-                        <div>
-                            버튼2
-                        </div>
+                        {isParticipant === "HOST" ? (
+                            <>
+                                <button>삭제</button>
+                                <button>수정</button>
+                            </>
+                        ) : (
+                            <button>좋아요</button>
+                        )}
                     </div>
                 </div>
-                <div className={styles.groupNameBox}>{overview.name}</div>
+                <div className={styles.groupNameBox}>{overview?.name}</div>
 
                 <section className={styles.overviewBox}>
                     <h4>모임 개요</h4>
@@ -103,9 +136,15 @@ const GroupDetail: React.FC = () => {
                 </section>
 
                 <div className={styles.footerButtons}>
-                    <button className={styles.button}>신청자 목록</button>
+                    {isParticipant === "HOST" && <button className={styles.button} onClick={handleApplicantListClick}>신청자 목록</button>}
+                    {isParticipant === "PARTICIPANT" && <button className={styles.button}>채팅하러 가기</button>}
+                    {isParticipant === "APPLIED" && <button className={styles.button}>신청 취소</button>}
+                    {(!isParticipant || isParticipant === "NONE") && (
+                        <button className={styles.button}  onClick={handleApplyClick}>가입 신청</button>
+                    )}
                 </div>
             </div>
+            {isModalOpen && <ApplicantListModal applicants={applicants} onClose={() => setIsModalOpen(false)} />}
         </>
     );
 };
