@@ -4,7 +4,8 @@ import "../GroupForm.css";
 import "./Step6.css";
 import type { FormData } from "../../../types";
 import ky from 'ky';
-import {useNavigate} from "react-router-dom";
+import { useNavigate } from "react-router-dom";
+import Mainlogo from './Main-logo4.jpg';
 
 interface Book {
     title: string;
@@ -90,11 +91,12 @@ const Step6: React.FC<Step6Props> = ({ prevStep, formData, setFormData, book }) 
     };
 
     return (
-        <div className="step-container">
-            <h2>모임 생성이 완료되었습니다</h2>
-            <button className="prev-button" onClick={prevStep}>이전</button>
-            <button className="complete-button" onClick={submitForm}>완료</button>
-        </div>
+       <div className="step-container">
+    <h2 className="complete-message">모임 생성이 완료되었습니다</h2>
+    <img src={Mainlogo} alt="로고" className="main-logo" />
+    <button className="complete-button" onClick={submitForm}>완료</button>
+</div>
+
     );
 };
 

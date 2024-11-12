@@ -4,7 +4,7 @@
     display: flex;
     justify-content: center;
     flex-wrap: wrap;
-    margin-bottom: 20px;
+    /* margin-bottom: 20px; */
 }
 
 .participant-button {
@@ -13,13 +13,20 @@
     border: 1px solid #ddd;
     border-radius: 5px;
     cursor: pointer;
+   
 }
 
 .participant-button.active {
     background-color: #4285f4;
     color: white;
+    
 }
 
 .textarea-field {
-    margin-top: 15px;
+    margin-top: -15px;
+    margin-bottom: 10px;
+}
+
+.button-container{
+    margin-top: -2px;
 }

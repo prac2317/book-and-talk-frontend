@@ -15,6 +15,7 @@ import ProfilePage from "./pages/profile/ProfilePage.tsx";
 import Register from "./pages/auth/Register.tsx";
 import InitialScreen from "./pages/auth/InitialScreen.tsx";
 import ApplyForm from "./pages/group/ApplyForm.tsx";
+import ApplySuccess from "./pages/group/ApplySuccess.jsx";
 
 const router = createBrowserRouter([
   {
@@ -78,6 +79,10 @@ const router = createBrowserRouter([
   {
     path: '/applyform',
     element: <ApplyForm />
+  },
+  {
+    path: '/applySuccess',
+    element: <ApplySuccess />
   }
 ]);
 

@@ -42,9 +42,11 @@ const Step5: React.FC<Step5Props> = ({ nextStep, prevStep, handleChange, formDat
                 maxLength={200}
                 className="textarea-field"
             />
+             <div className="button-container">
             <button className="prev-button" onClick={prevStep}>이전</button>
             <button className="next-button" onClick={nextStep}>다음</button>
-        </div>
+            </div>
+            </div>
     );
 };
 

@@ -37,9 +37,11 @@ const Step3: React.FC<Step3Props> = ({ nextStep, prevStep, handleChange, formDat
                 value={formData.location}
                 className="input-field"
             />
+             <div className="button-container">
             <button className="prev-button" onClick={prevStep}>이전</button>
             <button className="next-button" onClick={nextStep}>다음</button>
-        </div>
+            </div>
+            </div>
     );
 };
 

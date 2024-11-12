@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import ky from 'ky';
-import "./ApplyForm.css";
+import styles from "./ApplyForm.module.css";
 
 type ApplyRequest = {
     questionAnswer: string;
@@ -24,59 +24,62 @@ const ApplyForm: React.FC = () => {
                 },
             });
             setSubmissionMessage('참가 신청이 완료되었습니다.');
+            console.log(submissionMessage);
         } catch (error) {
             setSubmissionMessage('신청 중 오류가 발생했습니다.' + error);
+            console.log(submissionMessage);
+
         }
     };
-
+    
     return (
-      <div className="container">
-        <div className="header">
-          <span className="close-btn">&times;</span>
+      <div className={styles.container}>
+        <div className={styles.header}>
+          <span className={styles.closeBtn}>&times;</span>
         </div>
-        <div className="contents">
-          <div className="introduction">
+        <div className={styles.contents}>
+          <div className={styles.instroduction}>
             <h1>호스트의 질문에 답변해주세요</h1>
             <p>답변은 호스트와 운영자에게만 공개됩니다.</p>
           </div>
-          <div className="group-info">
-            <div className="section-title">가입 신청한 독클럽명</div>
-            <div className="input-field">북토피아 북클럽</div>
+          <div className={styles.groupInfo}>
+            <div className={styles.sectionTitle}>가입 신청한 모임 이름</div>
+            <div className={styles.titleInput}>북토피아 북클럽</div>
           </div>
-          <div className="group-question">
+          <div className={styles.groupQuestion}>
             <p>저희 모임은 책을 읽고 독후감을 작성하는 모임입니다. </p>
             <p>기간동안 잘 참여하실 수 있는 분이시라면 좋겠습니다.</p>
             <textarea
-              className="input-field"
+              className={styles.questionInput}
               rows={4}
               maxLength={maxCharCount}
               placeholder="호스트의 질문에 대한 답변을 적어주세요."
               value={questionAnswer}
               onChange={(e) => setQuestionAnswer(e.target.value)}
             />
-            <div className="character-count">
+            <div className={styles.characterCount}>
               {questionAnswer.length}/{maxCharCount}
             </div>
           </div>
         </div>
 
-        <div className="warning-container">
-            <div className="warning">
-                <div className="warning-icon">⚠️</div>
-                <div>주의해주세요!</div>
-            </div>
+        <div className={styles.warningContainer}>
+          <div className={styles.warning}>
+            <div className={styles.warningIcon}>⚠️</div>
+            <div>주의해주세요!</div>
+          </div>
 
-          <div className="warning-text">
-            전화번호, 카카오톡 아이디 등 과도한 개인정보를 묻는 경우, 가이드라인 위반 모임이므로
-            신고해주세요.
+          <div className={styles.warningTextBox}>
+            <p>전화번호, 카카오톡 아이디 등 과도한 개인정보를 묻는 경우,</p>
+            <p>가이드라인 위반 모임이므로 신고해주세요.</p>
           </div>
         </div>
 
-        <button className="button" onClick={handleSubmit}>
+        <button className={styles.button} onClick={handleSubmit}>
           다음
         </button>
 
-        {submissionMessage && <p className="submission-message">{submissionMessage}</p>}
+        {/*{submissionMessage && <p className={styles.submissionMessage}>{submissionMessage}</p>}*/}
       </div>
     );
 };

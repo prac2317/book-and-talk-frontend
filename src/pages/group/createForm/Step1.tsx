@@ -23,12 +23,11 @@ const Step1: React.FC<Step1Props> = ({ nextStep, book }) => {
             <h2>이 책의 모임을 만들까요?</h2>
             {book && (
                 <div className="book-info">
-                    <img src={book.thumbnailUrl} alt={book.title} />
+                    <img src={book.thumbnailUrl} alt={book.title}  className="book-image"/>
                     <div className="book-details">
                         <h3>{book.title}</h3>
-                        <p>{book.author}</p>
-                        <p>{book.date}</p>
-                        <p>{book.publication}</p>
+                        <p>{book.author} 저 | {book.publication}</p>
+                        {/* <p>{book.date}</p> */}
                     </div>
                 </div>
             )}

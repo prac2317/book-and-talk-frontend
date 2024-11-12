@@ -1,5 +1,25 @@
 /* Step3.css */
 
+.file-input {
+    height: 60px;
+    font-size: 12px;
+    margin-top: 30px;
+    background-color: #e6e7e75c;
+    color: #848484;
+}
+
 .input-field {
-    margin-bottom: 30px;
+    background-color: #e6e7e75c;
+    color: #848484;
+}
+
+
+
+
+
+
+.button-container {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 70px;
 }

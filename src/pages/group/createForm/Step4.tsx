@@ -17,13 +17,14 @@ const Step4: React.FC<Step4Props> = ({ nextStep, prevStep, handleChange, formDat
 
     return (
         <div className="step-container">
-            <h2>모임활동 기간을 정해주세요</h2>
+            <h2>모임활동 시작 날짜를 정해주세요</h2>
             <input
                 type="date"
                 onChange={handleChange('startDate')}
                 value={formData.startDate}
                 className="input-field"
             />
+            <h2>모집기간을 정해주세요</h2>
             <div className="duration-options">
                 {[1, 2, 3, 4, 5, 6, 7].map((day) => (
                     <button
@@ -35,8 +36,10 @@ const Step4: React.FC<Step4Props> = ({ nextStep, prevStep, handleChange, formDat
                     </button>
                 ))}
             </div>
+             <div className="button-container">
             <button className="prev-button" onClick={prevStep}>이전</button>
             <button className="next-button" onClick={nextStep}>다음</button>
+        </div>
         </div>
     );
 };

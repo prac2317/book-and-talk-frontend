@@ -29,8 +29,10 @@ const Step2: React.FC<Step2Props> = ({ nextStep, prevStep, handleChange, formDat
                 maxLength={500}
                 className="textarea-field"
             />
-            <button className="prev-button" onClick={prevStep}>이전</button>
-            <button className="next-button" onClick={nextStep}>다음</button>
+             <div className="button-container">
+                <button className="prev-button" onClick={prevStep}>이전</button>
+                <button className="next-button" onClick={nextStep}>다음</button>
+                </div>
         </div>
     );
 };
