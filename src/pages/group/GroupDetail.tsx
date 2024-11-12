@@ -1,3 +1,4 @@
+
 import React, { useEffect, useState } from 'react';
 import {useNavigate, useParams} from 'react-router-dom';
 import ky from 'ky';
@@ -65,6 +66,7 @@ const GroupDetail: React.FC = () => {
 
     const handleApplicantListClick = async () => {
         try {
+            // @ts-ignore
             const applicantData: applicantData = await ky.get(`${import.meta.env.VITE_BASE_URL}/api/application`, {
                 searchParams: { groupId },
                 headers: {

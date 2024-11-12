@@ -194,7 +194,7 @@
 // export default Login;
 
 // Login.tsx
-import React, { useState, ChangeEvent, FormEvent } from 'react';
+import React, { useState, FormEvent } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import ky from 'ky';
 import './Login.css';
@@ -216,7 +216,7 @@ const Login: React.FC = () => {
     const [password, setPassword] = useState('');
     const [error, setError] = useState('');
     const [isLoading, setIsLoading] = useState(false);
-    const [isAuthenticated, setIsAuthenticated] = useState<boolean>(false);
+    // const [isAuthenticated, setIsAuthenticated] = useState<boolean>(false);
 
 
     const handleSubmit = async (e: FormEvent) => {
@@ -247,7 +247,7 @@ const Login: React.FC = () => {
                 console.log('로그인 성공:', data);
                 const token = data.token;
                 localStorage.setItem('access_token', token);
-                setIsAuthenticated(true);
+                // setIsAuthenticated(true);
                 navigate('/');
             } else if (response.status === 401) {
                 console.error('잘못된 자격 증명');
