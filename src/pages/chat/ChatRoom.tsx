@@ -3,10 +3,16 @@ import './ChatRoom.css';
 import { useEffect, useRef, useState, KeyboardEvent, ChangeEvent } from 'react';
 // import SockJS from 'sockjs-client';
 import { Client, IMessage } from '@stomp/stompjs';
+import { useParams } from 'react-router-dom';
+import ky from 'ky';
 
 interface ChatMessage {
   userId: number;
   message: string;
+}
+
+interface myUserId {
+  userId: number;
 }
 
 type StompClient = Client | null;
@@ -18,10 +24,11 @@ function ChatRoom() {
   const [stompClient, setStompClient] = useState<StompClient>(null);
 
   // 채팅방, 사용자 번호 랜덤으로 만들기
-  const chatRoomIdRef = useRef(Math.floor(Math.random() * 2) + 1);
-  const memberIdRef = useRef(Math.floor(Math.random() * 9) + 1);
-  const chatRoomId = chatRoomIdRef.current;
-  const memberId = memberIdRef.current;
+  //     const memberIdRef = useRef(Math.floor(Math.random() * 9) + 1);
+  //     const memberId = memberIdRef.current;
+
+  const [myUserId, setMyUserId] = useState<number | null>(null);
+  const { chatRoomId } = useParams<{ chatRoomId: string }>();
 
   // 입력창에 대한 참조 설정
   const inputRef = useRef<HTMLInputElement>(null);
@@ -30,16 +37,29 @@ function ChatRoom() {
   const bottomRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
+    const checkMyData = async () => {
+      try {
+        const data: myUserId = await ky
+          .get(`${import.meta.env.VITE_BASE_URL}/api/chat/find-user`, {
+            headers: {
+              Authorization: `Bearer ${localStorage.getItem('access_token')}`,
+            },
+          })
+          .json();
+        setMyUserId(data?.userId);
+        console.log(myUserId);
+        console.log(chatRoomId);
+      } catch (error) {
+        console.error('Failed to fetch group details:', error);
+      }
+    };
+
+    checkMyData();
+  }, []);
+
+  useEffect(() => {
     // const socket = new SockJS('http://localhost:8080/ws-stomp');
-
     const token = localStorage.getItem('access_token');
-
-    // token 없을 경우 생각하기
-    // if (!token) {
-    //     console.log('엑세스 토큰이 없습니다');
-    //     return;
-    // }
-
     const client = new Client({
       brokerURL: 'ws://localhost:8080/ws', // SockJS 대신 WebSocket URL 사용
       reconnectDelay: 5000,
@@ -86,7 +106,7 @@ function ChatRoom() {
   const sendMessage = () => {
     if (stompClient && inputMessage.trim() !== '') {
       stompClient.publish({
-        destination: `/pub/chat/message/${chatRoomId}/${memberId}`,
+        destination: `/pub/chat/message/${chatRoomId}/${myUserId}`,
         body: JSON.stringify({ message: inputMessage }),
       });
       setInputMessage('');
@@ -115,12 +135,9 @@ function ChatRoom() {
         <h2>Chat</h2>
       </div>
       <div className="chat-body">
-        {/* <h1>Chat Page</h1>
-        <h2>채팅방 번호 : {chatRoomId}</h2>
-        <h2>사용자 번호 : {memberId}</h2> */}
         <div>
           {messages.map((msg, index) => (
-            <div className="message" key={index}>
+            <div className={`message ${msg.userId === myUserId} ? myMessage : yourMessage`} key={index}>
               <div>사용자{msg.userId}</div>
               <div>{msg.message}</div>
             </div>

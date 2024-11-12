@@ -74,6 +74,18 @@
     align-self: flex-end;
 }
 
+.myMessage {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+}
+
+.yourMessage {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+}
+
 .inputbox {
     display: flex;
     align-items: center;
