@@ -1,0 +1,77 @@
+/* Step4.css */
+
+.inputField {
+    margin-bottom: 50px;
+}
+
+.durationOptions {
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+}
+
+.durationButton {
+    padding: 10px;
+    margin: 5px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    cursor: pointer;
+    margin-bottom: 60px;
+    margin-top: 20px;
+}
+
+.durationButtonActive {
+    padding: 10px;
+    margin: 5px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    cursor: pointer;
+    margin-bottom: 60px;
+    margin-top: 20px;
+    background-color: #4285f4;
+    color: white;
+}
+
+.prevButton {
+    width: 150px !important;
+    color: #fff !important;
+    padding: 15px !important;
+    border: none !important;
+    cursor: pointer !important;
+    margin-bottom: 80px !important;
+    background: #808080 !important;
+    border-radius: 10px !important;
+    height: 55px !important;
+    box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.25) !important;
+    font-size: 21px !important;
+    font-weight: 400 !important;
+    letter-spacing: 2px !important;
+    margin-right: 50px;
+    margin-top: 80px;
+}
+
+.prevButton:hover {
+    background-color: #666;
+}
+
+.nextButton {
+    margin-top: 80px;
+    width: 150px !important;
+    color: #fff !important;
+    padding: 15px !important;
+    border: none !important;
+    cursor: pointer !important;
+    margin-bottom: 80px !important;
+    background: #3182f6 !important;
+    border-radius: 10px !important;
+    height: 55px !important;
+    box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.25) !important;
+    font-size: 21px !important;
+    font-weight: 400 !important;
+    letter-spacing: 2px !important;
+}
+
+.nextButton:active {
+    background-color: #0056b3;
+}
+

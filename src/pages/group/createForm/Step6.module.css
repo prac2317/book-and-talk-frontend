@@ -1,0 +1,101 @@
+/* Step6.css */
+
+
+.headerBox {
+    width: 430px;
+    height: 100vh;
+    margin: 0 auto; 
+    padding: 25px; 
+    padding-bottom: 40px;
+    background-color: #ffffff;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
+    letter-spacing: -1px;
+    line-height: 1.5;
+}
+
+
+.completeMessage {
+    width: 430px;
+    margin-top: 150px;
+    margin-left: 140px;
+    font-size: 20px;
+    font-weight: 600px;
+    font-size: 27px;
+
+}
+
+.Malogo {
+    width: 300px;
+    height: auto;
+    margin-top: -70px;
+    transform: scale(1.2);
+    /* filter: grayscale(1); */
+    /* opacity: 0.3; */
+
+}
+
+.completeButton {
+    width: 100%;
+    color: #fff;
+    padding: 15px;
+    border: none;
+    cursor: pointer;
+    margin-bottom: 180px;
+    background: #3182f6;
+    border-radius: 10px;
+    height: 55px;
+    box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.25);
+    font-size: 21px;
+    font-weight: 400;
+    letter-spacing: 2px;
+}
+
+.completeButton:active {
+    background-color: #0056b3;
+}
+
+.prevButton {
+    width: 150px !important;
+    color: #fff !important;
+    padding: 15px !important;
+    border: none !important;
+    cursor: pointer !important;
+    margin-bottom: 80px !important;
+    background: #808080 !important;
+    border-radius: 10px !important;
+    height: 55px !important;
+    box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.25) !important;
+    font-size: 21px !important;
+    font-weight: 400 !important;
+    letter-spacing: 2px !important;
+    margin-right: 50px;
+    margin-top: 80px;
+}
+
+.prevButton:hover {
+    background-color: #666;
+}
+
+.nextButton {
+    margin-top: 80px;
+    width: 150px !important;
+    color: #fff !important;
+    padding: 15px !important;
+    border: none !important;
+    cursor: pointer !important;
+    margin-bottom: 80px !important;
+    background: #3182f6 !important;
+    border-radius: 10px !important;
+    height: 55px !important;
+    box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.25) !important;
+    font-size: 21px !important;
+    font-weight: 400 !important;
+    letter-spacing: 2px !important;
+}
+
+.nextButton:active {
+    background-color: #0056b3;
+}
