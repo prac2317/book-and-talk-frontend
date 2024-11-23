@@ -1,0 +1,74 @@
+/* Step3.css */
+
+.title333{
+    margin-bottom: 50px;
+    margin-left: 50px;
+    margin-bottom: 50px;
+    margin-top: 20px;
+}
+
+.groupImage {
+    text-align: center;
+    margin-bottom: 40px;
+}
+.fileInput {
+    height: 60px;
+    font-size: 12px;
+    margin-top: 30px;
+    background-color: #e6e7e75c;
+    color: #848484;
+}
+
+.inputField {
+    background-color: #e6e7e75c;
+    color: #848484;
+}
+
+.buttonContainer {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 70px;
+}
+
+.prevButton {
+    width: 150px !important;
+    color: #fff !important;
+    padding: 15px !important;
+    border: none !important;
+    cursor: pointer !important;
+    margin-bottom: 80px !important;
+    background: #808080 !important;
+    border-radius: 10px !important;
+    height: 55px !important;
+    box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.25) !important;
+    font-size: 21px !important;
+    font-weight: 400 !important;
+    letter-spacing: 2px !important;
+    margin-right: 50px;
+    margin-top: 80px;
+}
+
+.prevButton:hover {
+    background-color: #666;
+}
+
+.nextButton {
+    margin-top: 80px;
+    width: 150px !important;
+    color: #fff !important;
+    padding: 15px !important;
+    border: none !important;
+    cursor: pointer !important;
+    margin-bottom: 80px !important;
+    background: #3182f6 !important;
+    border-radius: 10px !important;
+    height: 55px !important;
+    box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.25) !important;
+    font-size: 21px !important;
+    font-weight: 400 !important;
+    letter-spacing: 2px !important;
+}
+
+.nextButton:active {
+    background-color: #0056b3;
+}

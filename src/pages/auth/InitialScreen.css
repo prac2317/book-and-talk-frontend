@@ -5,7 +5,7 @@
 }
 
 .main-logo {
-    width: 500px;
+    width: 430px;
     height: 100vh;
     z-index: 1;
     object-fit: cover;
@@ -31,7 +31,7 @@
 .kakao-button,
 .login-button {
     display: block;
-    width: 460px;
+    width: 380px;
     height: 60px;
     /* margin-top: 2000px auto; */
     padding: 10px 20px;
@@ -43,6 +43,7 @@
     transition: background-color 0.3s ease;
     z-index: 2;
     font-weight: bold;
+    margin-bottom: 5px;
 }
 
 /* 카카오 버튼 스타일 */

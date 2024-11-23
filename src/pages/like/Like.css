@@ -1,0 +1,61 @@
+/* Like.css */
+
+.app-wrapper {
+    display: flex;
+    justify-content: center;
+    /*padding: 10px;*/
+    background-color: #f9f9f9;
+    min-height: 100vh;
+}
+
+.mark-container {
+    width: 100%;
+    /*width: 430px;*/
+    background-color: #ffffff;
+    /*border-radius: 10px;*/
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+    overflow: hidden;
+}
+
+.top-nav {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 15px;
+    border-bottom: 1px solid #e4e4e4;
+    background-color: #ffffff;
+    /*color: #ffffff;*/
+}
+
+.title {
+    font-size: 1.2rem;
+    margin: 0;
+}
+
+.top-buttons {
+    display: flex;
+    gap: 10px;
+}
+
+.top-buttons button {
+    background: none;
+    border: none;
+    /*color: #ffffff;*/
+    font-size: 1rem;
+    padding: 5px 10px;
+    border-radius: 5px;
+    transition: background-color 0.3s;
+}
+
+.top-buttons button:hover {
+    background-color: rgba(255, 255, 255, 0.2);
+}
+
+.top-buttons button.bold {
+    font-weight: bold;
+    border-bottom: 2px solid #ffffff;
+}
+
+.content {
+    padding: 15px;
+}

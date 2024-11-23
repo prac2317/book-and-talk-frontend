@@ -1,35 +1,44 @@
-import ky from 'ky';
-import { useNavigate } from 'react-router-dom';
+import Logout from './Logout';
+import styles from './profile.module.css';
 
 const ProfilePage = () => {
-  const navigate = useNavigate();
-
-  const logout = async () => {
-    try {
-      // 로그아웃을 위한 GET 요청
-      const response = await ky.get('http://localhost:8080/logout', {
-        credentials: 'include', // 쿠키 포함
-        throwHttpErrors: false, // 2xx가 아닌 응답에서도 에러를 던지지 않음
-      });
-
-      if (response.status === 200) {
-        // const data = await response.json();
-        console.log('로그아웃 성공:');
-        localStorage.removeItem('access_token');
-        navigate('/login');
-      } else {
-        console.error(`로그아웃 중 예상치 못한 응답 상태: ${response.status}`);
-      }
-    } catch (error) {
-      console.error('로그아웃 중 오류:', error);
-    }
-  };
-
   return (
-    <>
-      <h3>Profile</h3>
-      <button onClick={logout}>로그아웃</button>
-    </>
+    <div className={styles.header34}>
+      <h3 className={styles.header}>마이페이지</h3>
+      <Logout />
+
+      <div className={styles.name12}>오소리</div>
+      <div className={styles.name23}>email.gmail.com</div>
+      <div className={styles.textContainer}>
+        <div className={styles.textBox}>
+          <input
+            className="text12"
+            type="text"
+            placeholder="가입한 모임
+        4"
+          />
+        </div>
+        <div className={styles.textBox}>
+          <input
+            className="text23"
+            type="text"
+            placeholder="제출한 결과물
+        4"
+          />
+        </div>
+      </div>
+      <div className={styles.name123123}>
+        <p className={styles.profileInfoHeader}>가입정보</p>
+
+        <div className={styles.profileAction}>회원정보수정</div>
+        <div className={styles.profileAction}>로그아웃</div>
+        <div className={styles.profileActio33}>회원탈퇴</div>
+        <p className={styles.profileInfoHeader}>고객센터</p>
+        <div className={styles.profileAction}>공지사항</div>
+        <div className={styles.profileAction}>서비스 이용 약관</div>
+        <div className={styles.profileAction}>버전 정보</div>
+      </div>
+    </div>
   );
 };
 
