@@ -9,7 +9,7 @@ const PrivateRoute: React.FC<PrivateRouteProps> = ({ children }) => {
   const token = localStorage.getItem('access_token');
   console.log(token);
 
-  return token ? <>{children}</> : <Navigate to="/login" />;
+  return token ? <>{children}</> : <Navigate to="/initial" />;
 };
 
 export default PrivateRoute;

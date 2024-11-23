@@ -1,6 +1,5 @@
 import React, {useEffect, useState} from "react";
 import GroupItem from "../../components/GroupItem";
-import { faker } from "@faker-js/faker";
 import ky from "ky";
 
 interface GroupLike {

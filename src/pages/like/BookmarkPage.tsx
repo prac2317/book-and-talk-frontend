@@ -1,6 +1,5 @@
 import React, {useEffect, useState} from "react";
 import BookItem from "../../components/BookItem";
-import { faker } from "@faker-js/faker";
 import ky from "ky";
 
 
