@@ -43,7 +43,9 @@ function ChatRoom() {
                 const data: myUserId = await ky
                     .get(`${import.meta.env.VITE_BASE_URL}/api/chat/find-user`, {
                         headers: {
-                            Authorization: `Bearer ${localStorage.getItem('access_token')}`,
+                            // 테스트 위해 세션스토리지로 변경
+                            // Authorization: `Bearer ${localStorage.getItem('access_token')}`,
+                            Authorization: `Bearer ${sessionStorage.getItem('access_token')}`,
                         },
                     })
                     .json();

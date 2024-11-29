@@ -1,6 +1,6 @@
 // InitialScreen.tsx
-import React from 'react';
-import { Link } from 'react-router-dom';
+import React, { useEffect } from 'react';
+import { Link, useNavigate } from 'react-router-dom';
 import './InitialScreen.css';
 import MainLogo from './Main-Logo3.jpg';
 
@@ -9,6 +9,15 @@ const InitialScreen: React.FC = () => {
     const kakaoAuthUrl = `${import.meta.env.VITE_BASE_URL}/oauth2/authorization/kakao`;
     window.location.href = kakaoAuthUrl;
   };
+
+  // 로그인 한 사용자일 경우 home 화면으로 이동
+  const navigate = useNavigate();
+  useEffect(() => {
+    const token = localStorage.getItem('access_token');
+    if (token) {
+      navigate('/');
+    }
+  }, []);
 
   return (
     <div className="initial-screen">

@@ -194,7 +194,7 @@
 // export default Login;
 
 // Login.tsx
-import React, { useState, FormEvent } from 'react';
+import React, { useState, FormEvent, useEffect } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import ky from 'ky';
 import './Login.css';
@@ -218,12 +218,20 @@ const Login: React.FC = () => {
   const [isLoading, setIsLoading] = useState(false);
   // const [isAuthenticated, setIsAuthenticated] = useState<boolean>(false);
 
+  // 로그인 한 사용자일 경우 home 화면으로 이동
+  useEffect(() => {
+    const token = localStorage.getItem('access_token');
+    if (token) {
+      navigate('/');
+    }
+  }, []);
+
   const handleSubmit = async (e: FormEvent) => {
     e.preventDefault();
     await loginUser();
 
     // 로그인 로직 구현
-    navigate('/initial');
+    navigate('/');
   };
   //
   const loginUser = async () => {
@@ -245,6 +253,7 @@ const Login: React.FC = () => {
         console.log('로그인 성공:', data);
         const token = data.token;
         localStorage.setItem('access_token', token);
+        sessionStorage.setItem('access_token', token); // 채팅, 알림 등 로컬에서 여러 명 구현하기 위해 세션스토리지 활용 -> 나중에 지우기
         // setIsAuthenticated(true);
         navigate('/');
       } else if (response.status === 401) {
